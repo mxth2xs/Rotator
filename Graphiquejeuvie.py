@@ -23,6 +23,10 @@ txtvie3.grid(row=4)
 #Texte d'espacement entre les widgets
 txtevie1 = Tk.Label(fenetre, text=" ", bg=c_fond).grid(row=1)
 txtevie2 = Tk.Label(fenetre, text=" ", bg=c_fond).grid(row=3)
+txtevie3 = Tk.Label(fenetre, text=" ", bg=c_fond).grid(row=5)
+
+#Création du bouton start
+bouton_start_vie = Tk.Button(fenetre, text="Start", fg=c_texte, bg=c_bouton, width=25, height=2, font=("Cambria", 15)).grid(row=6)
 
 #Images
 #croixrouge = Tk.Label(image="croixrouge.ppm")

@@ -10,6 +10,9 @@ fenetre.title("Rotator")
 fenetre.config(bg=c_fond)
 fenetre.geometry("320x480")
 
+def affichervie():
+    vie = open("Graphiquejeuvie.py", "r", encoding="utf8")
+
 
 #Création du texte
 txt1=Tk.Label(fenetre, text="Rotator", fg=c_texte, bg=c_fond, font=("Cambria",50))
@@ -33,7 +36,7 @@ txte6.grid(row=9)
 
 #Création des différents boutons
 
-bouton_vie = Tk.Button(fenetre, text="Le jeu de la vie", fg=c_texte, bg=c_bouton, width=40, height=3)
+bouton_vie = Tk.Button(fenetre, text="Le jeu de la vie", fg=c_texte, bg=c_bouton, width=40, height=3, command=affichervie())
 bouton_vie.grid(row=4, padx=15)
 
 bouton_lab = Tk.Button(fenetre, text="Labyrinth", fg=c_texte, bg=c_bouton, width=40, height=3)
