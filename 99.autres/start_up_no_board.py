@@ -2,15 +2,19 @@
 import time
 # +-----------------------+ #
 
-num_pixels = 22*22
 
-# +----- Color constants -----+ #
-RED=(255,0,0)
-BLUE=(0,255,0)
-GREEN=(0,0,255)
-WHITE=(255,255,255)
-CLEAR=(0,0,0)
-# +---------------------------+ #
+# +----- Config LEDS -----+ #
+num_pixels = 22*22
+# +-----------------------+ #
+
+
+# +----- Constantes pour les couleurs -----+ #
+ROUGE=(255,0,0)
+BLEU=(0,255,0)
+VERT=(0,0,255)
+BLANC=(255,255,255)
+NOIR=(0,0,0)
+# +----------------------------------------+ #
 
 
 # +----- Make the snake board a grid of two dimentions -----+ #
@@ -48,8 +52,8 @@ for i in range(len(matrix)):
 print()
 
 
-#print(printed_matrix(matrix))
-for line in matrix: print(line)
+
+#for line in matrix: print(line)
 
 
 indices = []

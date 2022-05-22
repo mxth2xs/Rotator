@@ -1,8 +1,9 @@
-from numpy import intersect1d
+
 import pygame, random
 from pygame import *
 
 def SNAKEGAME():
+
 	def MAIN_GAME():
 		pygame.init()
 		
@@ -30,7 +31,6 @@ def SNAKEGAME():
 		delete = False
 		foodcords = True
 		score = -1
-		#gameover = pygame.image.load("/Leandri/FPS/resources/images/gameover.png")
 		waitforanswer = True
 
 		def addnewpiece(direction, delete):#Function to add new piece to end of tail. If the snake has eaten food, dont delete the other piece.
@@ -168,17 +168,14 @@ def SNAKEGAME():
 					deathscreen()
 					Game = False
 				
-				elif playerpositions[-1][1] < 0:
-					playerpositions[-1][1]=height
-					print("Switch : top -> bottom")
-					#deathscreen()
-					#Game = False
-				elif playerpositions[-1][1] > height:
-					playerpositions[-1][1]=0	
-					print("Switch : bottom -> top")					
-					#deathscreen()
-					#Game = False
 				else:
+					if playerpositions[-1][1] < 0:
+						playerpositions[-1][1]=height
+					print("Switch : top -> bottom")
+					if playerpositions[-1][1] > height:
+						playerpositions[-1][1]=0	
+					print("Switch : bottom -> top")					
+
 					drawgame()
 
 				
@@ -191,3 +188,5 @@ def SNAKEGAME():
 
 
 	MAIN_GAME()
+
+SNAKEGAME()
