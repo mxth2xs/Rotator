@@ -6,6 +6,5 @@ sudo python3 -m pip install neopixel
 
 mkdir ~/github/ && cd ~/github/
 git clone https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel.git
-git clone https://github.com/mxth2xs/Rotator.git
 cd ./Adafruit_CircuitPython_NeoPixel/examples/
 sudo python3 ./neopixel_rpi_simpletest.py
