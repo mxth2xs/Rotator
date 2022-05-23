@@ -86,11 +86,18 @@ def SNAKEGAME():
 		def drawgame():
 			
 			#Afficher la food
-			pixels[(xfood*22)+yfood] = BLEU
+			if xfood%2==1:
+				pixels[(xfood*22)+(21-yfood)] = BLEU
+			elif xfood%2==0:
+				pixels[(xfood*22)+yfood] = BLEU
 
 			#Afficher le snake
 			for led in playerpositions:
-				pixels[(led[0]*22)+led[1]] = VERT
+
+				if led[0]%2==1:
+					pixels[(led[0]*22)+(21-led[1])] = VERT	
+				elif led[0]%2==0:
+					pixels[(led[0]*22)+led[1]] = VERT
 
 			pixels.show()
 

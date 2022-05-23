@@ -4,8 +4,20 @@ Created on Sun Apr  3 10:55:46 2022
 
 @author: cades
 """
-import random
+import random,neopixel,board
 import neopixel
+
+
+#LED setup
+pixel_pin = board.D18
+num_pixels = 22*22
+ORDER = neopixel.RGB
+
+pixels = neopixel.NeoPixel(
+    pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
+)
+
+
 table=[]
 
 def allumer_leds():
