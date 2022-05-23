@@ -125,48 +125,9 @@ print(tablo(), "après un tour")
 boucle(table,10,800)"""
 
 
-
-
 table
 L=60
 H= 20
 table=tableaux(L, H)
 aléatoire()
 boucle(table,10,800)
-    print(around)
-    for x in range (H):
-        for y in range (L):
-            if around[x][y]==2 and table[x][y]>0:
-                None
-            elif around[x][y]==3 and table[x][y]>0:
-                None
-            elif around[x][y]==3 and table[x][y]==0:
-                table[x][y]=1
-
-            else:
-                table[x][y]=0
-    return table
-
-def tableaux (L,H):
-    table=[]
-    for i in range (0,H):
-        ligne=[]
-        for y in range (0,L):
-            ligne.append(0)
-        table.append(ligne)
-    return table
-
-def addvalue (x,y,a):
-    global table
-    table[x][y]=a
-    
-L=5
-H= 10
-table=tableaux(L, H)
-print (table, "tableau vierge")
-addvalue(1, 1, 1)
-addvalue(1, 2, 1)
-addvalue(1, 3, 1)
-print(table, "une fois configuré")
-globalcalcul(L, H)
-print(table, "après un tour")
