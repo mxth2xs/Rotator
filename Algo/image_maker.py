@@ -31,6 +31,6 @@ def image_maker():
     imgSmall.show()
 
     #Afficher   
-    for led in strand:
+    for led in range(len(strand)):
         strand.setPixelColor(led, pixels_origin[led][0], pixels_origin[led][1], pixels_origin[led][2])
         strand.show()
