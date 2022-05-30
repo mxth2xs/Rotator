@@ -27,6 +27,10 @@ class NeoPixel(object):
         response = self.ser.readline()
         print(response)
 
+    def fillPixels(strand, red, green, blue):
+        for i in range(484):
+            strand.setPixelColor(i, red, green, blue)
+
 
 if __name__ == "__main__":
     import sys

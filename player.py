@@ -1,8 +1,8 @@
 # +------------------- Imports -------------------+ #
 import tkinter as tk
 from Algo.image_maker import image_maker
-from Algo.snake import snake
-#from Algo.jeudelavie import JeuDeLaVie
+from Algo.snake import SNAKEGAME
+from Algo.jeudelavie import jeudelavie
 from UI.graphiqueSnakeFin import snakeFin
 # +-----------------------------------------------+ #
 
@@ -68,7 +68,7 @@ btn_jeudelavie = tk.Button(fenetre_principale, text="Le jeu de la vie", fg=c_tex
 ).grid(row=4, padx=15)
 
 btn_snake = tk.Button(fenetre_principale, text="Snake", fg=c_texte, bg=c_bouton, width=40, height=3, 
-    command= lambda: afficher_jeu("Snake","Faites grandir votre \n serpent, et attention \n aux murs !", 15, 10, "snake")
+    command= lambda: afficher_jeu("Snake","Faites grandir votre \n serpent, et attention \n aux murs !", 15, 10, "SNAKEGAME")
 ).grid(row=6, padx=15)
 
 btn_labyrinth = tk.Button(fenetre_principale, text="Labyrinth", fg=c_texte, bg=c_bouton, width=40, height=3, 
