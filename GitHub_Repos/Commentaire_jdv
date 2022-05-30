@@ -1,0 +1,25 @@
+    """def addvalue (x,y,a): # pour ajouter une valeur
+        global table
+        table[x][y]=a"""
+
+    """def tablo():
+        global table
+        tableau_bo = ""
+        for i in table:
+            for j in i:
+                if j==0:
+                    tableau_bo = tableau_bo + " " + " "
+                else:
+                    tableau_bo = tableau_bo + str(j) + " "
+            tableau_bo += "\n"   
+        return tableau_bo"""
+    
+
+    """print (tablo, "tableau vierge")
+    aléatoire()
+    print(tablo())
+    globalcalcul(L, H)
+    print("initial")
+    print(tablo(), "après un tour")
+    boucle(table,10,800)"""
+

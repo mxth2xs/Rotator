@@ -2,7 +2,7 @@ def image_maker():
     from PIL import Image
     from tkinter import Tk
     from tkinter.filedialog import askopenfilename
-    from .lib.neopixel import NeoPixel
+    from lib.neopixel import NeoPixel
 
     #Script pour la configuration des LEDs.
     strand = NeoPixel('COM3')

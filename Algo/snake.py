@@ -2,7 +2,7 @@ def SNAKEGAME():
 	# +------------------- Imports -------------------+ #
 	import time, random
 	from pynput.keyboard import Listener
-	"""import GitHub_Repos.NeoPixelUno.neopixel.neopixel as neopixel"""
+	import lib.neopixel as neopixel
 	# +-----------------------------------------------+ #
 	
 	# +----------------- Config LEDs -----------------+ #
