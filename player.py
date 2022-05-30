@@ -12,12 +12,6 @@ c_bouton = "#69657f"
 c_texte = "#ffffff"
 # +-----------------------------------------------+ #
 
-# +---------- Config fenêtre principale ----------+ #
-fenetre_principale = tk.Tk()
-fenetre_principale.title("Rotator")
-fenetre_principale.config(bg=c_fond)
-# +-----------------------------------------------+ #
-
 # +---------- Fonction : fen des jeux ----------+ #
 def afficher_jeu(nom,description, padx1, padx2, jeux):
     """
@@ -50,19 +44,25 @@ def afficher_jeu(nom,description, padx1, padx2, jeux):
     space3 =        tk.Label(fenetre_jeu, text=" ", bg=c_fond).grid(row=5)
     
     fenetre_jeu.mainloop()
+# +-----------------------------------------------+ #
 
+# +---------- Config fenêtre principale ----------+ #
+fenetre_principale = tk.Tk()
+fenetre_principale.title("Rotator")
+fenetre_principale.config(bg=c_fond)
+# +-----------------------------------------------+ #
 
-#Création du texte
-header=tk.Label(fenetre_principale, text="Rotator", fg=c_texte, bg=c_fond, font=("Cambria",50)).grid(row=1)
-instruction=tk.Label(fenetre_principale, text="Choisissez votre jeu :", fg=c_texte, bg=c_fond, font=("Cambria",20)).grid(row=2)
+# +---------- Labels fenêtre principale ----------+ #
+headerrr = tk.Label(fenetre_principale, bg=c_fond, text="Rotator", fg=c_texte, font=("Cambria",50)).grid(row=1)
+instruct = tk.Label(fenetre_principale, bg=c_fond, text="Choisissez votre jeu :", fg=c_texte, font=("Cambria",20)).grid(row=2)
+space_r3 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=3)
+space_r5 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=5)
+space_r7 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=7)
+space_r9 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=9)
+space_r9 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=11)
+# +-----------------------------------------------+ #
 
-space_r3=tk.Label(fenetre_principale, text=" ", bg=c_fond).grid(row=3)
-space_r5=tk.Label(fenetre_principale, text=" ", bg=c_fond).grid(row=5)
-space_r7=tk.Label(fenetre_principale, text=" ", bg=c_fond).grid(row=7)
-space_r9=tk.Label(fenetre_principale, text=" ", bg=c_fond).grid(row=9)
-
-#Création des différents boutons
-
+# +---------- Boutons fenêtre principale ---------+ #
 btn_jeudelavie = tk.Button(fenetre_principale, text="Le jeu de la vie", fg=c_texte, bg=c_bouton, width=40, height=3, 
     command= lambda: afficher_jeu("Jeu de la vie","Déplacez vous \n avec les boutons \n et créez le schéma \n de départ...", 20, 25, "jeudelavie")
 ).grid(row=4, padx=15)
@@ -78,6 +78,7 @@ btn_labyrinth = tk.Button(fenetre_principale, text="Labyrinth", fg=c_texte, bg=c
 btn_image_maker = tk.Button(fenetre_principale, text="Image Maker", fg=c_texte, bg=c_bouton, width=40, height=3, 
     command= lambda: afficher_jeu("Image Maker","Affichez l'image \n de votre choix \n en LEDs ! ", 10, 25, "image_maker") 
 ).grid(row=10, padx=15)
+# +-----------------------------------------------+ #
 
 
 fenetre_principale.mainloop()
