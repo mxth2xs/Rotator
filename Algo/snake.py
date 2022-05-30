@@ -2,11 +2,11 @@ def SNAKEGAME():
 	# +------------------- Imports -------------------+ #
 	import time, random
 	from pynput.keyboard import Listener
-	import GitHub_Repos.NeoPixelUno.neopixel.neopixel as neopixel
+	"""import GitHub_Repos.NeoPixelUno.neopixel.neopixel as neopixel"""
 	# +-----------------------------------------------+ #
 	
 	# +----------------- Config LEDs -----------------+ #
-	strand = neopixel.NeoPixel('COM3')
+	"""strand = neopixel.NeoPixel('COM3')"""
 	num_pixels = 22*44
 	width=22
 	height = num_pixels//width
@@ -24,7 +24,7 @@ def SNAKEGAME():
 		score = -1
 
 		# - Réinitialise les couleurs des LEDs
-		strand.show()
+		"""strand.show()"""
 
 		# +-----------------------------------------------+ #
 
@@ -73,7 +73,7 @@ def SNAKEGAME():
 		def drawgame():
 			"""Afficher le jeu sur les LEDs !"""
 			# - Food
-			if xfood%2 == 1: # inverser à cause de la disposition en zigzag.
+			"""if xfood%2 == 1: # inverser à cause de la disposition en zigzag.
 				strand.setPixelColor((xfood*22)+(22-yfood), 0,0,255)
 			else:
 				strand.setPixelColor((xfood*22)+yfood, 0,0,255)
@@ -85,18 +85,18 @@ def SNAKEGAME():
 				else:
 					strand.setPixelColor((led[0]*22)+led[1], 0,255,0)
 			
-			strand.show()
+			strand.show()"""
 			
 			#Output text (optionnel)
-			"""game_status = {
+			game_status = {
 				#"dir" : f"{direction_text[direction]} ({direction})",
 				"taille" : len(playerpositions),
 				"score" : score,
-				#"positions" : playerpositions,
+				"positions" : playerpositions,
 				"food" : (xfood,yfood),
 				"dir_possible" : dir_possible
-				}
-			print(game_status)"""
+			}
+			print(game_status)
 		# +-----------------------------------------------+ #
 
 		# +---------------- Fonction death ---------------+ #
@@ -110,9 +110,9 @@ def SNAKEGAME():
 			f = open('./99.autres/snake_game_over.txt')
 			game_over = f.read()
 			f.close()
-			for led in range(len(strand)):
+			"""for led in range(len(strand)):
 				strand.setPixelColor(led, game_over[led][0],game_over[led][1],game_over[led][2])
-			strand.show()
+			strand.show()"""
 
 			#récupérer le record
 			f = open('./99.autres/snake_highscore.txt', 'r')
