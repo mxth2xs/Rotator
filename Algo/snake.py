@@ -6,8 +6,8 @@ def SNAKEGAME():
 	# +-----------------------------------------------+ #
 	
 	# +----------------- Config LEDs -----------------+ #
-	strand = neopixel.NeoPixel('/dev/ttyACM0')
-	num_pixels = 22*22
+	strand = neopixel.NeoPixel('COM3')
+	num_pixels = 22*44
 	width=22
 	height = num_pixels//width
 	# +-----------------------------------------------+ #
@@ -230,4 +230,6 @@ def SNAKEGAME():
 
 	MAIN_GAME()
 
-SNAKEGAME()
+
+if __name__ == "__main__":
+	SNAKEGAME()

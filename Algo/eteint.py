@@ -7,4 +7,5 @@ def eteint():
     num_led = 484
     strand.show()
 
-eteint()
+if __name__ == "__main__":
+    eteint()

@@ -35,3 +35,7 @@ def image_maker():
     for led in range(num_led):
         strand.setPixelColor(led, pixels_origin[led][0], pixels_origin[led][1], pixels_origin[led][2])
         strand.show()
+
+
+if __name__ == "__main__":
+    image_maker()
