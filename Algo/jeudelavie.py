@@ -14,9 +14,9 @@ def jeudelavie():
 
     #Création d'un tableaux vierge
     def tableaux(L,H,table):
-        for i in range(0,H):
+        for i in range(H):
             table.append([])
-            for j in range(0,L):
+            for j in range(L):
                 table[i].append(0)
         return table
 
@@ -31,15 +31,9 @@ def jeudelavie():
     #Calcule le nombre de cases "vivantes" autours d'une certaine case et les comptabilise
     def calculautour(x,y,H,L,table): 
         autour=0
-        for xi in range (x-1,x+2): 
-            for yi in range (y-1,y+2):
-                if xi==x and yi==y:
-                    None 
-                elif yi<0:
-                    None
-                elif yi>=L:
-                    None
-                elif table[xi%H][yi]>0 :
+        for xi in range (x-1,x+1): 
+            for yi in range (y-1,y+1):
+                if table[xi%H][yi]>0 :
                     autour+=1
                 else:
                     None
@@ -49,10 +43,9 @@ def jeudelavie():
     def globalcalcul (L,H,table):
         around=[]
         for x in range (H):
-            ligne=[]
+            around.append([])
             for y in range (L):
-                ligne.append(calculautour(x,y,H,L,table))
-            around.append(ligne)
+                around[x].append(calculautour(x,y,H,L,table))
 
         for x in range (H):
             for y in range (L):
