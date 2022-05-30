@@ -3,7 +3,7 @@ import tkinter as tk
 #Import des jeux
 from Algo.image_maker import image_maker
 from Algo.snake import snake
-from Algo.jeudelavie import JeuDeLaVie
+#from Algo.jeudelavie import JeuDeLaVie
 
 #import des fenetre de fin de jeu
 from UI.graphiqueSnakeFin import snakeFin
@@ -15,7 +15,7 @@ c_texte = "#ffffff"
 fenetre_principale = tk.Tk()
 fenetre_principale.title("Rotator")
 fenetre_principale.config(bg=c_fond)
-fenetre_principale.geometry("320x480")
+#fenetre_principale.geometry("320x480")
 
 
 #Fenetre du jeu
@@ -44,7 +44,7 @@ def afficher_jeu(nom,description, padx1, padx2, jeux):
     fenetre_jeu = tk.Tk()
     fenetre_jeu.title(nom)
     fenetre_jeu.config(bg=c_fond)
-    fenetre_jeu.geometry("320x480")
+    #fenetre_jeu.geometry("320x480")
 
     #Création du texte
     header = tk.Label(fenetre_jeu, text=nom, fg=c_texte, bg=c_fond, font=("Cambria",40)).grid(row=0, padx=padx1)

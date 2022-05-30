@@ -4,9 +4,9 @@ def image_maker():
     from tkinter.filedialog import askopenfilename
     
     #Script pour la configuration des LEDs.
-    from LED_setup import LED_setup
-    num_pixels, pixels = LED_setup()
-    
+    import neopixel
+    strand = neopixel.NeoPixel('/dev/ttyACM0', 22*22, 0.2)
+  
     #Import d'image
     Tk().withdraw()
     filename = askopenfilename()
@@ -31,8 +31,6 @@ def image_maker():
     imgSmall.show()
 
     #Afficher   
-    for led in pixels:
-        pixels[led] = pixels_origin[led]
-    pixels.show()
-
-image_maker()
+    for led in strand:
+        strand.setPixelColor(led, pixels_origin[led][0], pixels_origin[led][1], pixels_origin[led][2])
+        strand.show()

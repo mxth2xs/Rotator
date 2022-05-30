@@ -10,3 +10,8 @@ def LED_setup():
     )
     # +----------------------------------------+ #
     return num_pixels, pixels
+
+def LED_setup_uno():
+    import neopixel
+    strand = neopixel.NeoPixel('/dev/ttyACM0')
+    return strand

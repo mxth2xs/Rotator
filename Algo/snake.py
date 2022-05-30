@@ -1,13 +1,14 @@
 def snake():
-		
 	import time, random
 	from pynput.keyboard import Listener
 
 
 	#Script pour la configuration des LEDs.
-	from LED_setup import LED_setup
-	num_pixels, pixels = LED_setup()
-
+	import neopixel
+	
+	num_pixels = 22*22
+	strand = neopixel.NeoPixel('/dev/ttyACM0', num_pixels, 0.2)
+  
 	#'dimensions' du plan
 	width=22
 	if num_pixels == 22*22*2:height=44
@@ -37,7 +38,11 @@ def snake():
 			score = -1
 
 			# Réinitialise les couleurs des LEDs
-			pixels.fill(NOIR)
+			for i in range(len(strand)):
+				strand.setPixelColor(i, 0,0,0)
+			strand.show()
+        
+				###pixels.fill(NOIR)
 
 			# - positions initiales du joueur
 			playerpositions = [[0,0],[1,0],[2,0]]
@@ -82,13 +87,16 @@ def snake():
 			def drawgame():
 				
 				#Afficher la food
-				pixels[(xfood*22)+yfood] = BLEU
+				strand.setPixelColor((xfood*22)+yfood, 0,255,0)
+					###pixels[(xfood*22)+yfood] = BLEU
 
 				#Afficher le snake
 				for led in playerpositions:
-					pixels[(led[0]*22)+led[1]] = VERT
+					strand.setPixelColor((led[0]*22)+led[1], 0,0,255)
+					###pixels[(led[0]*22)+led[1]] = VERT
 
-				pixels.show()
+				strand.show()
+				###pixels.show()
 
 				#Output text (optionnel)
 				"""game_status = {
@@ -110,9 +118,11 @@ def snake():
 				f = open('./99.autres/snake_game_over.txt')
 				game_over = f.read()
 				f.close()
-				for led in pixels:
-					pixels[led] = game_over[led]
-				pixels.show()
+				for led in range(len(strand)):
+					strand.setPixelColor(led, game_over[led][0],game_over[led][1],game_over[led][2])
+					###pixels[led] = game_over[led]
+				strand.show()
+				###pixels.show()
 
 				#récupérer le record
 				f = open('./99.autres/snake_highscore.txt', 'r')
@@ -139,7 +149,7 @@ def snake():
 				#tempo
 				time.sleep(0.1)
 				#
-				pixels.fill(NOIR)
+				#pixels.fill(NOIR)
 
 				"""	
 					#Check if the event is the x button
