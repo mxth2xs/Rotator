@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Apr  3 10:55:46 2022
-
-@author: cades
-"""
 def jeudelavie():
     global table
     import random
@@ -15,35 +9,27 @@ def jeudelavie():
 
     table=[]
 
-    def allumer_leds():
-        global table
-        for i in range (len(table)):
-            for j in range (22):
-                if i%2==0:
-                    if table[i][j]==0:
-                        strand.setPixelColor(22*i+j, 0,0,0)
-                        #pixels[22*i+j]=(0,0,0)
-                    elif table[i][j]==1:
-                        strand.setPixelColor(22*i+j, 255,0,0)
-                        #pixels[22*i+j]=(255,0,0)
-                    elif table[i][j]==2:
-                        strand.setPixelColor(22*i+j, 0,255,0)
-                        #pixels[22*i+j]=(0,255,0)
-                else:
-                    if table[i][j]==0:
-                        strand.setPixelColor(22*(i+1)-j, 0,0,0)
-                        #pixels[22*(i+1)-j]=(0,0,0)
-                    elif table[i][j]==1:
-                        strand.setPixelColor(22*(i+1)-j, 255,0,0)
-                        #pixels[22*(i+1)-j]=(255,0,0)
-                    elif table[i][j]==2:
-                        strand.setPixelColor(22*(i+1)-j, 0,255,0) 
-                        #pixels[22*(i+1)-j]=(0,255,0)
+    L= 60
+    H= 20
 
-        strand.show()
+    #Création d'un tableaux vierge
+    def tableaux(L,H,table):
+        for i in range(0,H):
+            table.append([])
+            for j in range(0,L):
+                table[i].append(0)
+        return table
 
-    def calculautour(x,y,H,L): #calcule le nombre de cases "vivantes" autours d'une certaine case et les comptabilise
-        global table, around
+    #Remplissage de ce tableau par un tableau de départ aléatoire 
+    def aléatoire(table): 
+        for i in range (0,H):
+            for y in range (0,L):
+                table[i][y]=random.randint(0,1)
+        return table
+
+
+    #Calcule le nombre de cases "vivantes" autours d'une certaine case et les comptabilise
+    def calculautour(x,y,H,L,table): 
         autour=0
         for xi in range (x-1,x+2): 
             for yi in range (y-1,y+2):
@@ -55,21 +41,19 @@ def jeudelavie():
                     None
                 elif table[xi%H][yi]>0 :
                     autour+=1
-                    # print(x,y,xi,yi)
                 else:
                     None
         return autour
 
         
-    def globalcalcul (L,H):
-        global table
+    def globalcalcul (L,H,table):
         around=[]
         for x in range (H):
             ligne=[]
             for y in range (L):
-                ligne.append(calculautour(x,y,H,L))
+                ligne.append(calculautour(x,y,H,L,table))
             around.append(ligne)
-        #print(around)
+
         for x in range (H):
             for y in range (L):
                 if around[x][y]==2 and table[x][y]>0:
@@ -78,73 +62,36 @@ def jeudelavie():
                     None
                 elif around[x][y]==3 and table[x][y]==0:
                     table[x][y]=1
-
                 else:
                     table[x][y]=0
         return table
 
-    def tableaux (L,H):#création d'un tableaux vierge
-        table=[]
-        for i in range (0,H):
-            ligne=[]
-            for y in range (0,L):
-                ligne.append(0)
-            table.append(ligne)
-        return table
-
-    """def addvalue (x,y,a): # pour ajouter une valeur
-        global table
-        table[x][y]=a"""
-
-    def boucle(tab,time,rep):
-        tt=0
-        global table
+    #Création d'une boucle répétition qui force la répétition du programme "rep" nombre de fois
+    def boucle(table,rep):
         while rep>=0:
-            for i in range (0,1000000*time):
-                tt=tt
-            globalcalcul(L, H)
-            allumer_leds()
+            globalcalcul(L, H,table)
+            allumer_leds(table)
             rep-=1
-            #tablo()
-            #print(tablo())
-            #print("-----------------------------------------------------")
 
-    def aléatoire(): #création d'un tableaux aléatoire
-        global table
-
-        for i in range (0,H):
-            for y in range (0,L):
-                table[i][y]=random.randint(0,1)
-        return table
-
-    """def tablo():
-        global table
-        tableau_bo = ""
-        for i in table:
-            for j in i:
-                if j==0:
-                    tableau_bo = tableau_bo + " " + " "
+    #Lecture de la liste table afin d'allumer les leds
+    def allumer_leds(table):
+        for i in range (len(table)):
+            for j in range (22):
+                if i%2==0:
+                    if table[i][j]==0:
+                        strand.setPixelColor(22*i+j, 0,0,0)
+                    elif table[i][j]==1:
+                        strand.setPixelColor(22*i+j, 255,0,0)
                 else:
-                    tableau_bo = tableau_bo + str(j) + " "
-            tableau_bo += "\n"   
-        return tableau_bo"""
-    
+                    if table[i][j]==0:
+                        strand.setPixelColor(22*(i+1)-j, 0,0,0)
+                    elif table[i][j]==1:
+                        strand.setPixelColor(22*(i+1)-j, 255,0,0)
+        strand.show()
 
-    """print (tablo, "tableau vierge")
-    aléatoire()
-    print(tablo())
-    globalcalcul(L, H)
-    print("initial")
-    print(tablo(), "après un tour")
-    boucle(table,10,800)"""
-
-
-    table
-    L=60
-    H= 20
-    table=tableaux(L, H)
-    aléatoire()
-    boucle(table,10,800)
+    tableaux(L,H,table)
+    aléatoire(table)
+    boucle(table,800)
 
 if __name__ == "__main__":
     jeudelavie()
