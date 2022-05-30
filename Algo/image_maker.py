@@ -2,10 +2,11 @@ def image_maker():
     from PIL import Image
     from tkinter import Tk
     from tkinter.filedialog import askopenfilename
-    
+    from .lib.neopixel import NeoPixel
+
     #Script pour la configuration des LEDs.
-    import neopixel
-    strand = neopixel.NeoPixel('/dev/ttyACM0', 22*22, 0.2)
+    strand = NeoPixel('COM3')
+    num_led = 484
   
     #Import d'image
     Tk().withdraw()
@@ -31,6 +32,6 @@ def image_maker():
     imgSmall.show()
 
     #Afficher   
-    for led in strand:
+    for led in range(num_led):
         strand.setPixelColor(led, pixels_origin[led][0], pixels_origin[led][1], pixels_origin[led][2])
         strand.show()
