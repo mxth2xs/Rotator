@@ -5,8 +5,9 @@ Created on Sun Apr  3 10:55:46 2022
 @author: cades
 """
 def jeudelavie():
+    global table
     import random
-    from .lib.neopixel import NeoPixel
+    from lib.neopixel import NeoPixel
 
     #Script pour la configuration des LEDs.
     strand = NeoPixel('COM3')
@@ -39,7 +40,7 @@ def jeudelavie():
                         strand.setPixelColor(22*(i+1)-j, 0,255,0) 
                         #pixels[22*(i+1)-j]=(0,255,0)
 
-        pixels.show()
+        strand.show()
 
     def calculautour(x,y,H,L): #calcule le nombre de cases "vivantes" autours d'une certaine case et les comptabilise
         global table, around
@@ -110,6 +111,7 @@ def jeudelavie():
 
     def aléatoire(): #création d'un tableaux aléatoire
         global table
+
         for i in range (0,H):
             for y in range (0,L):
                 table[i][y]=random.randint(0,1)

@@ -33,34 +33,10 @@ class NeoPixel(object):
 
 
 if __name__ == "__main__":
-    import sys
 
-    strand = NeoPixel(sys.argv[1])
+    strand = NeoPixel('COM3')
 
-    strand.setPixelColor(0, 255, 0, 0)
-    strand.show()
-    time.sleep(1)
-    strand.setPixelColor(0, 0, 255, 0)
-    strand.setPixelColor(1, 255, 0, 0)
-    strand.show()
-    time.sleep(1)
-    strand.setPixelColor(0, 0, 0, 255)
-    strand.setPixelColor(1, 0, 255, 0)
-    strand.setPixelColor(2, 255, 0, 0)
-    strand.show()
-    time.sleep(1)
-    strand.setPixelColor(0, 0, 0, 0)
-    strand.setPixelColor(1, 0, 0, 255)
-    strand.setPixelColor(2, 0, 255, 0)
-    strand.show()
-    time.sleep(1)
-    strand.setPixelColor(0, 0, 0, 0)
-    strand.setPixelColor(1, 0, 0, 0)
-    strand.setPixelColor(2, 0, 0, 255)
-    strand.show()
-    time.sleep(1)
-    strand.setPixelColor(0, 0, 0, 0)
-    strand.setPixelColor(1, 0, 0, 0)
-    strand.setPixelColor(2, 0, 0, 0)
-    strand.show()
+    for i in range(484):
+        strand.setPixelColor(i, 255, 0, 0)
 
+    strand.show()
