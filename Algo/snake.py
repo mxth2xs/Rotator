@@ -25,8 +25,7 @@ def SNAKEGAME():
 
 		# - Réinitialise les couleurs des LEDs
 		strand.show()
-			#NeoPixel.fillPixels(strand,0,0,0)
-			#strand.show()
+
 		# +-----------------------------------------------+ #
 
 		# +----------- Initialisation snake -----------+ #
@@ -75,16 +74,16 @@ def SNAKEGAME():
 			"""Afficher le jeu sur les LEDs !"""
 			# - Food
 			if xfood%2 == 1: # inverser à cause de la disposition en zigzag.
-				strand.setPixelColor((xfood*22)+(22-yfood), 0,255,0)
+				strand.setPixelColor((xfood*22)+(22-yfood), 0,0,255)
 			else:
-				strand.setPixelColor((xfood*22)+yfood, 0,255,0)
+				strand.setPixelColor((xfood*22)+yfood, 0,0,255)
 
 			# - Snake
 			for led in playerpositions:
 				if led[0]%2 == 1: # inverser à cause de la disposition en zigzag.
 					strand.setPixelColor((led[0]*22)+(22-led[1]), 0,255,0)
 				else:
-					strand.setPixelColor((led[0]*22)+led[1], 0,0,255)
+					strand.setPixelColor((led[0]*22)+led[1], 0,255,0)
 			
 			strand.show()
 			
