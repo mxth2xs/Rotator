@@ -42,7 +42,7 @@ def SNAKEGAME():
 		:param delete: (bool) enlever ou non le 1er élément des positions.
 		"""
 		if delete == False:
-			if playerpositions[0][0]%2 == 1: strand.setPixelColor((playerpositions[0][0]*22)+(22-playerpositions[0][1]), 0,0,0)
+			if playerpositions[0][1]%2 == 1: strand.setPixelColor((playerpositions[0][0]*22)+(22-playerpositions[0][1]), 0,0,0)
 			else: strand.setPixelColor((playerpositions[0][0]*22)+playerpositions[0][1], 0,0,0)
 			strand.show()
 			playerpositions.pop(0)
@@ -76,14 +76,14 @@ def SNAKEGAME():
 	def drawgame():
 		"""Afficher le jeu sur les LEDs !"""
 		# - Food
-		if xfood%2 == 1: # inverser à cause de la disposition en zigzag des LEDs.
+		if yfood%2 == 1: # inverser à cause de la disposition en zigzag des LEDs.
 			strand.setPixelColor((xfood*22)+(22-yfood), 0,0,255)
 		else:
 			strand.setPixelColor((xfood*22)+yfood, 0,0,255)
 
 		# - Snake
 		for led in playerpositions:
-			if led[0]%2 == 1: # inverser...
+			if led[1]%2 == 1: # inverser...
 				strand.setPixelColor((led[0]*22)+(22-led[1]), 0,255,0)
 			else:
 				strand.setPixelColor((led[0]*22)+led[1], 0,255,0)
@@ -175,7 +175,7 @@ def SNAKEGAME():
 		if playerpositions[-1] == [xfood, yfood]:
 			foodonscreen = False
 			# - Changer la couleur de la led de nourriture
-			if xfood%2 == 1: strand.setPixelColor((xfood*22)+(22-yfood), 0,255,0)
+			if yfood%2 == 1: strand.setPixelColor((xfood*22)+(22-yfood), 0,255,0)
 			else: strand.setPixelColor((xfood*22)+yfood, 0,255,0)
 			strand.show()
 			delete = True
