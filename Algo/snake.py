@@ -42,6 +42,9 @@ def SNAKEGAME():
 		:param delete: (bool) enlever ou non le 1er élément des positions.
 		"""
 		if delete == False:
+			if playerpositions[0][0]%2 == 1: strand.setPixelColor((playerpositions[0][0]*22)+(22-playerpositions[0][1]), 0,0,0)
+			else: strand.setPixelColor((playerpositions[0][0]*22)+playerpositions[0][1], 0,0,0)
+			strand.show()
 			playerpositions.pop(0)
 		
 		# En fonction de la direction, on ajoute la nouvelle coordonnée de la tete du snake.
@@ -105,7 +108,7 @@ def SNAKEGAME():
 		drawgame()
 		
 		#ecran 'game over'
-		f = open('./99.autres/snake_game_over.txt')
+		f = open('./Snake_ext/snake_game_over.txt')
 		game_over = f.read()
 		f.close()
 		for led in range(len(strand)):
@@ -113,7 +116,7 @@ def SNAKEGAME():
 		strand.show()
 
 		#récupérer le record
-		f = open('./99.autres/snake_highscore.txt', 'r')
+		f = open('./Snake_ext/snake_highscore.txt', 'r')
 		record = int(f.readline())
 		f.close()
 		#comparer le score du joueur et le record
@@ -123,7 +126,7 @@ def SNAKEGAME():
 			gagnant = 1
 		
 		#Le fichier a trois lignes : 1) le record ; 2) le score du joueur ; 3) 1 ou 0 en fonction de si le joueur à battu le record.
-		f = open('./99.autres/snake_highscore.txt', 'w')
+		f = open('./Snake_ext/snake_highscore.txt', 'w')
 		f.write(f"{record}\n{score}\n{gagnant}")
 		f.close()	
 	# +-----------------------------------------------+ #
@@ -171,6 +174,10 @@ def SNAKEGAME():
 		# - Si une food a été mangée, déplacer et rajouter un pixel
 		if playerpositions[-1] == [xfood, yfood]:
 			foodonscreen = False
+			# - Changer la couleur de la led de nourriture
+			if xfood%2 == 1: strand.setPixelColor((xfood*22)+(22-yfood), 0,255,0)
+			else: strand.setPixelColor((xfood*22)+yfood, 0,255,0)
+			strand.show()
 			delete = True
 			addnewpiece(direction, delete)
 		# - Sinon, déplacer sans rajouter...
