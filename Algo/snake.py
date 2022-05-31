@@ -5,8 +5,10 @@ def SNAKEGAME():
 	import lib.neopixel as neopixel
 	# +-----------------------------------------------+ #
 	
+	dry_run = False
+
 	# +----------------- Config LEDs -----------------+ #
-	strand = neopixel.NeoPixel('COM3')
+	if not dry_run: strand = neopixel.NeoPixel('COM3')
 	num_led = 22*22
 	width=22
 	height = num_led//width
@@ -22,7 +24,7 @@ def SNAKEGAME():
 	score = -1
 
 	# - Réinitialise les couleurs des LEDs
-	strand.show()
+	if not dry_run: strand.show()
 	# +-----------------------------------------------+ #
 
 	# +----------- Initialisation snake -----------+ #
@@ -42,9 +44,10 @@ def SNAKEGAME():
 		:param delete: (bool) enlever ou non le 1er élément des positions.
 		"""
 		if delete == False:
-			if playerpositions[0][0]%2 == 1: strand.setPixelColor((playerpositions[0][0]*22)+(22-playerpositions[0][1]), 0,0,0)
-			else: strand.setPixelColor((playerpositions[0][0]*22)+playerpositions[0][1], 0,0,0)
-			strand.show()
+			if not dry_run:
+				if playerpositions[0][0]%2 == 1: strand.setPixelColor((playerpositions[0][0]*22)+(22-playerpositions[0][1]), 0,0,0)
+				else: strand.setPixelColor((playerpositions[0][0]*22)+playerpositions[0][1], 0,0,0)
+				strand.show()
 			playerpositions.pop(0)
 		
 		# En fonction de la direction, on ajoute la nouvelle coordonnée de la tete du snake.
@@ -75,33 +78,36 @@ def SNAKEGAME():
 	def drawgame():
 		"""Afficher le jeu sur les LEDs !"""
 		# - Food
-		if xfood%2 == 1: # inverser à cause de la disposition en zigzag des LEDs.
-			strand.setPixelColor((xfood*22)+(22-yfood), 0,0,255)
-		else:
-			strand.setPixelColor((xfood*22)+yfood, 0,0,255)
+		if not dry_run:
+			if xfood%2 == 1: # inverser à cause de la disposition en zigzag des LEDs.
+				strand.setPixelColor((xfood*22)+(22-yfood), 0,0,255)
+			else:
+				strand.setPixelColor((xfood*22)+yfood, 0,0,255)
 
 		# - Snake
 		leds = []
 		for led in playerpositions:
 			if led[0]%2 == 1: # inverser...
-				addr_led = (led[0]*22)+(22-led[1])
+				addr_led = (led[0]*22)+(led[1])
 			else:
 				addr_led = (led[0]*22)+led[1]
-			strand.setPixelColor(addr_led, 0,255,0)
+			if not dry_run:
+				strand.setPixelColor(addr_led, 0,255,0)
 			leds.append(addr_led)
-		strand.show()
-		print(leds)
+		if not dry_run:strand.show()
 		
 		#Output text (optionnel)
-		"""game_status = {
-			"dir" : f"{direction_text[direction]} ({direction})",
-			"taille" : len(playerpositions),
-			"score" : score,
-			"positions" : playerpositions,
-			"food" : (xfood,yfood),
-			"dir_possible" : dir_possible
+		if dry_run:
+			game_status = {
+				"dir" : direction,
+				#"taille" : len(playerpositions),
+				#"score" : score,
+				"pos" : playerpositions,
+				"addr" : leds,
+				#"food" : (xfood,yfood),
+				"dir_possible" : dir_possible
 			}
-		print(game_status)"""
+			print(game_status)
 	# +-----------------------------------------------+ #
 
 	# +---------------- Fonction death ---------------+ #
@@ -110,11 +116,15 @@ def SNAKEGAME():
 		drawgame()
 		
 		#ecran 'game over'
-		
-		for led in range(num_led):
-			strand.setPixelColor(led, 255,0,0)
-		strand.show()
-
+		if not dry_run:
+			for led in playerpositions:
+				if led[0]%2 == 1: # inverser...
+					addr_led = (led[0]*22)+(22-led[1])
+				else:
+					addr_led = (led[0]*22)+led[1]
+				strand.setPixelColor(addr_led, 0,0,0)
+			strand.show()
+	
 		#récupérer le record
 		f = open('./Snake_ext/snake_highscore.txt', 'r')
 		record = int(f.readline())
@@ -175,9 +185,10 @@ def SNAKEGAME():
 		if playerpositions[-1] == [xfood, yfood]:
 			foodonscreen = False
 			# - Changer la couleur de la led de nourriture
-			if xfood%2 == 1: strand.setPixelColor((xfood*22)+(22-yfood), 0,255,0)
-			else: strand.setPixelColor((xfood*22)+yfood, 0,255,0)
-			strand.show()
+			if not dry_run:
+				if xfood%2 == 1: strand.setPixelColor((xfood*22)+(22-yfood), 0,255,0)
+				else: strand.setPixelColor((xfood*22)+yfood, 0,255,0)
+				strand.show()
 			delete = True
 			addnewpiece(direction, delete)
 		# - Sinon, déplacer sans rajouter...
