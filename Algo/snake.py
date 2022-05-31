@@ -5,7 +5,7 @@ def SNAKEGAME():
 	import lib.neopixel as neopixel
 	# +-----------------------------------------------+ #
 	
-	dry_run = False
+	dry_run = True
 
 	# +----------------- Config LEDs -----------------+ #
 	if not dry_run: strand = neopixel.NeoPixel('COM3')
@@ -79,18 +79,20 @@ def SNAKEGAME():
 		"""Afficher le jeu sur les LEDs !"""
 		# - Food
 		if not dry_run:
-			if xfood%2 == 1: # inverser à cause de la disposition en zigzag des LEDs.
-				strand.setPixelColor((xfood*22)+(22-yfood), 0,0,255)
-			else:
+			if xfood%2 == 0: # inverser à cause de la disposition en zigzag des LEDs.
 				strand.setPixelColor((xfood*22)+yfood, 0,0,255)
+			elif xfood%2 == 1:
+				strand.setPixelColor((xfood*22)+(21-yfood), 0,0,255)
 
 		# - Snake
 		leds = []
 		for led in playerpositions:
-			if led[0]%2 == 1: # inverser...
-				addr_led = (led[0]*22)+(led[1])
-			else:
-				addr_led = (led[0]*22)+led[1]
+			x = led[0]
+			y = led[1]
+			# - Si la colonne est paire
+			if x%2 == 0: addr_led = 22*x + y
+			# - Si la colonne est impaire
+			elif x%2 == 1: addr_led = 22*x + (21-y)
 			if not dry_run:
 				strand.setPixelColor(addr_led, 0,255,0)
 			leds.append(addr_led)
@@ -107,8 +109,8 @@ def SNAKEGAME():
 				#"food" : (xfood,yfood),
 				"dir_possible" : dir_possible
 			}
-			print(game_status)
-	# +-----------------------------------------------+ #
+			print(game_status['dir'], game_status['pos'], game_status['addr'])
+	# +-----------------------------------------sds------+ #
 
 	# +---------------- Fonction death ---------------+ #
 	def death():
@@ -118,10 +120,12 @@ def SNAKEGAME():
 		#ecran 'game over'
 		if not dry_run:
 			for led in playerpositions:
-				if led[0]%2 == 1: # inverser...
-					addr_led = (led[0]*22)+(22-led[1])
-				else:
-					addr_led = (led[0]*22)+led[1]
+				x = led[0]
+				y = led[1]
+				# - Si la colonne est paire
+				if x%2 == 0: addr_led = 22*x + y
+				# - Si la colonne est impaire
+				elif x%2 == 1: addr_led = 22*x + (21-y)
 				strand.setPixelColor(addr_led, 0,0,0)
 			strand.show()
 	
@@ -186,7 +190,7 @@ def SNAKEGAME():
 			foodonscreen = False
 			# - Changer la couleur de la led de nourriture
 			if not dry_run:
-				if xfood%2 == 1: strand.setPixelColor((xfood*22)+(22-yfood), 0,255,0)
+				if xfood%2 == 1: strand.setPixelColor((xfood*22)+(21-yfood), 0,255,0)
 				else: strand.setPixelColor((xfood*22)+yfood, 0,255,0)
 				strand.show()
 			delete = True
@@ -229,7 +233,7 @@ def SNAKEGAME():
 		# +------------ Plan infini (haut-bas) -----------+ #
 			else:
 				if playerpositions[-1][1] < 0:
-					playerpositions[-1][1]=height
+					playerpositions[-1][1]=height-1
 				if playerpositions[-1][1] > height:
 					playerpositions[-1][1]=0	
 				drawgame()
