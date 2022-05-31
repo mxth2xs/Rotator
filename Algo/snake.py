@@ -7,7 +7,7 @@ def SNAKEGAME():
 	
 	# +----------------- Config LEDs -----------------+ #
 	strand = neopixel.NeoPixel('COM3')
-	num_led = 22*44
+	num_led = 22*22
 	width=22
 	height = num_led//width
 	# +-----------------------------------------------+ #
@@ -111,7 +111,7 @@ def SNAKEGAME():
 		f = open('./Snake_ext/snake_game_over.txt')
 		game_over = f.read()
 		f.close()
-		for led in range(len(strand)):
+		for led in range(len(num_led)):
 			strand.setPixelColor(led, game_over[led][0],game_over[led][1],game_over[led][2])
 		strand.show()
 
