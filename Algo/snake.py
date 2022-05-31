@@ -111,7 +111,7 @@ def SNAKEGAME():
 		f = open('./Snake_ext/snake_game_over.txt')
 		game_over = f.read()
 		f.close()
-		for led in range(len(num_led)):
+		for led in range(num_led):
 			strand.setPixelColor(led, game_over[led][0],game_over[led][1],game_over[led][2])
 		strand.show()
 
