@@ -19,8 +19,21 @@ def scribble():
 
     tk.Button(scribble, text='Choisir une couleur', command=change_color).grid(row=0, column=0)
 
+    def list_color_creation():
+        global list_color
+
+        list_color = []
+    
+        for i in range(22):
+            list_color.append([])
+            for j in range(22):
+                list_color[i].append(["x", "r", "g", "b"])
+        return list_color
+
+    list_color_creation()
+
     def left_click(event):
-        global X,Y, colors, bandeau,click
+        global X,Y, colors, bandeau,click,list_color
         click = True
         X = event.x
         Y = event.y
@@ -28,6 +41,18 @@ def scribble():
         recup_coord()
         if bandeau == True and y1_final < 460 and x1_final < 440:
             carre = C.create_rectangle(coord, fill = colors[1], outline="")
+            x = coord[0]//22
+            y = coord[1]//22
+
+            if y%2 == 0:
+                led = x + 22*(y-1)
+            else:
+                led = 22*y-x
+
+            list_color[X][Y][0] = led
+            list_color[X][Y][1] = colors[1][0]
+            list_color[X][Y][2] = colors[1][1]
+            list_color[X][Y][3] = colors[1][2]
 
     def right_click(event):
         global X,Y,colors, bandeau, x1_final, y1_final
@@ -76,12 +101,12 @@ def scribble():
     def print_image():
         global image
         if image == True:
-            image_maker("scribble_creation")
+            image_maker("scribble_creation", list_color)
             image = False
 
         else:
             img= ImageGrab.grab((x+2, y+20, x+w-4, y+h-4)).save("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".jpg")
-            image_maker("scribble_creation")
+            image_maker("scribble_creation", list_color)
 
     def destroy():
         C.delete('all')
