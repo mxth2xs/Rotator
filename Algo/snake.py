@@ -49,7 +49,7 @@ def SNAKEGAME():
 				else: strand.setPixelColor((playerpositions[0][0]*22)+playerpositions[0][1], 0,0,0)
 				strand.show()
 			playerpositions.pop(0)
-		
+		"\\"
 		# En fonction de la direction, on ajoute la nouvelle coordonnée de la tete du snake.
 		# - En allant vers la gauche, x est plus grand
 		# - En allant vers le bas, y est plus grand
@@ -170,7 +170,7 @@ def SNAKEGAME():
 
 	while Game:
 		# - Vitesse du jeu
-		time.sleep(0.5)		
+		time.sleep(0.1)		
 
 		# +----------- Changer la direction ----------+ #
 		# - Pour chaque touche, si la touche a été pressée...
@@ -206,7 +206,7 @@ def SNAKEGAME():
 			foodcords = True
 			while foodcords:
 				xfood = random.randint(0,width)
-				yfood = random.randint(0,height)
+				yfood = random.randint(0,height-1)
 				score += 1
 				foodcords = False
 				if [xfood, yfood] in playerpositions:
@@ -234,7 +234,7 @@ def SNAKEGAME():
 			else:
 				if playerpositions[-1][1] < 0:
 					playerpositions[-1][1]=height-1
-				if playerpositions[-1][1] > height:
+				if playerpositions[-1][1] > height-1:
 					playerpositions[-1][1]=0	
 				drawgame()
 		# +-----------------------------------------------+ #
