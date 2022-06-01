@@ -144,13 +144,13 @@ def SNAKEGAME(mode):
 				if not DRY:
 					strand.setPixelColor(addr_LED(led[0],led[1]), 255,0,0)
 					if led[0]-1 >= 0:
-						strand.setPixelColor(addr_LED(led[0]-1,led[1]), 255,0,0)
+						strand.setPixelColor(addr_LED(led[0]-1,led[1]), 0,0,0)
 			for led in missiles_droite:
 				led_missile_d.append([addr_LED(led[0]+1,led[1]), addr_LED(led[0],led[1])])
 				if not DRY:
 					strand.setPixelColor(addr_LED(led[0],led[1]), 255,0,0)
 					if led[0]-1 < 484:
-						strand.setPixelColor(addr_LED(led[0]+1,led[1]), 255,0,0)
+						strand.setPixelColor(addr_LED(led[0]+1,led[1]), 0,0,0)
 
 
 		if not DRY:
