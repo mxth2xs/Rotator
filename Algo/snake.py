@@ -240,15 +240,17 @@ def SNAKEGAME(mode):
 		# - Déplacer les missiles
 		if tour >= 1:
 			for i in missiles_gauche: 
+				if not DRY: strand.setPixelColor(addr_LED(i[0],i[1]), 0,0,0)
 				if i[0] >= 21: missiles_gauche.remove(i)
 				else: i[0] += 1
 			for i in missiles_droite: 
+				if not DRY: strand.setPixelColor(addr_LED(i[0],i[1]), 0,0,0)
 				if i[0] <= 0: missiles_droite.remove(i)
 				else: i[0] -= 1
 
 		if MODE >=1: 
 			# +----- MISSILES -----+ #
-			if tempo==0 and random.randint(1,1) == 1: # 20% de chance de missile
+			if tempo==0 and random.randint(1,5) == 1: # 20% de chance de missile
 				tempo = 5
 				for i in range(random.randint(1,3)): 
 					missiles_gauche.append([0,random.randint(1,height-1)])	# position random
