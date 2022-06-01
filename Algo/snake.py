@@ -38,12 +38,13 @@ def SNAKEGAME(mode):
 	elif 'B' in mode: MODE = 1
 	elif 'A' in mode: MODE = 2
 	elif 'S' in mode: MODE = 3
-	elif '++' in mode: MODE = -1
+	elif '++' in mode: MODE = 999
 
+	
 	# +-----------------------------------------------+ #
 
 	# +----------------- Config LEDs -----------------+ #
-	if not DRY: strand = neopixel.NeoPixel('COM3')
+	if not DRY: strand = NeoPixel('COM3')
 	num_led = 22*22
 	width=22
 	height = num_led//width
@@ -57,7 +58,8 @@ def SNAKEGAME(mode):
 	delete = False
 	foodcords = True
 	score = -1
-
+	leds = []
+	tour = 0
 	# - Réinitialise les couleurs des LEDs
 	if not DRY: strand.show()
 	# +-----------------------------------------------+ #
@@ -119,55 +121,33 @@ def SNAKEGAME(mode):
 	def drawgame():
 		"""Afficher le jeu sur les LEDs !"""
 		# - Food
-		if not DRY:
-			strand.setPixelColor(addr_LED(xfood,yfood), 0,0,255)
+		if not DRY: strand.setPixelColor(addr_LED(xfood,yfood), 0,0,255)
 
 		# - Snake
-		if DRY: leds = []
-
 		for led in playerpositions:
-			
-			x = led[0]
-			y = led[1]
-			# - Si la colonne est paire
-			if x%2 == 0: addr_led = 22*x + y
-			# - Si la colonne est impaire
-			elif x%2 == 1: addr_led = 22*x + (21-y)
-			
-			if not DRY:
-				strand.setPixelColor(addr_led, 0,255,0)
-			leds.append(addr_led)
-		if not DRY:strand.show()
+			if not DRY: strand.setPixelColor(addr_LED(led[0],led[1]), 0,255,0)
+			else: leds.append(addr_LED(led[0],led[1]))
 		
-		#Output text (optionnel)
-		if DRY:
+		if not DRY:
+			strand.show()
+		else:	#Output text
 			game_status = {
 				"dir" : direction,
-				#"taille" : len(playerpositions),
-				#"score" : score,
 				"pos" : playerpositions,
 				"addr" : leds,
+				#"score" : score,
 				#"food" : (xfood,yfood),
-				"dir_possible" : dir_possible
+				#"dir_possible" : dir_possible
 			}
-			print(game_status['dir'], game_status['pos'], game_status['addr'])
+			print(game_status)
 	# +-----------------------------------------------+ #
 
 	# +---------------- Fonction death ---------------+ #
 	def death():
 		"""Pour la mort du snake."""
-		#drawgame()
-		
-		#ecran 'game over'
 		if not DRY:
 			for led in playerpositions:
-				x = led[0]
-				y = led[1]
-				# - Si la colonne est paire
-				if x%2 == 0: addr_led = 22*x + y
-				# - Si la colonne est impaire
-				elif x%2 == 1: addr_led = 22*x + (21-y)
-				strand.setPixelColor(addr_led, 0,0,0)
+				strand.setPixelColor(addr_LED(led[0],led[1]), 0,0,0)
 			strand.show()
 	
 		#récupérer le record
@@ -200,8 +180,7 @@ def SNAKEGAME(mode):
 		elif key.char=='q' and 3 in dir_possible:  keys[3]=True
 	
 	# - Ecouter continuellement pour un input.
-	listener = keyboard.Listener(
-		on_press=key_press)
+	listener = keyboard.Listener(on_press=key_press)
 	listener.start()
 	# +-----------------------------------------------+ #
 
@@ -212,6 +191,14 @@ def SNAKEGAME(mode):
 	while Game:
 		# - Vitesse du jeu
 		time.sleep(0.1)		
+
+		# +------------------ Modes ------------------+ #
+
+		#variable qui incrémente de 1 à chaque fois,
+		tour += 1
+		# si var >
+		# +-------------------------------------------+ #
+
 
 		# +----------- Changer la direction ----------+ #
 		# - Pour chaque touche, si la touche a été pressée...
@@ -231,8 +218,7 @@ def SNAKEGAME(mode):
 			foodonscreen = False
 			# - Changer la couleur de la led de nourriture
 			if not DRY:
-				if xfood%2 == 1: strand.setPixelColor((xfood*22)+(21-yfood), 0,255,0)
-				else: strand.setPixelColor((xfood*22)+yfood, 0,255,0)
+				strand.setPixelColor(addr_LED(xfood,yfood), 0,255,0)
 				strand.show()
 			delete = True
 			addnewpiece(direction, delete)
