@@ -319,6 +319,10 @@ def SNAKEGAME(mode):
 		for i in explosives:
 			if i in playerpositions:
 				Game = False
+				if not DRY:
+					for i in explosives:
+						strand.setPixelColor(addr_LED(i[0],i[1]), 255,0,0)
+					strand.show()
 				death("Boom.")
 		# - Si le snake sort du plan (gauche ou droite) :
 		else: # Ce 'else' est relié à la condition de nourriture à l'écran : 'if foodonscreen == False'.
