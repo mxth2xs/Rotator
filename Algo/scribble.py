@@ -83,13 +83,17 @@ def scribble():
             img= ImageGrab.grab((x+2, y+20, x+w-4, y+h-4)).save("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".jpg")
             image_maker("scribble_creation")
 
+    def destroy():
+        C.delete('all')
+
     tk.Button(scribble, text='Exporter image_pixel', command=export_image).grid(row = 0, column=1)
     tk.Button(scribble, text='Afficher image_pixel sur les leds', command=print_image).grid(row = 0, column=2)
+    tk.Button(scribble, text='Supprimer dessin', command=destroy).grid(row = 0, column=3)
 
 
     #Affichage de la fenêtre Canvas
-    C.grid(row=1, column=0, columnspan=3)
+    C.grid(row=1, column=0, columnspan=4)
     scribble.mainloop()
 
-
-scribble() 
+if __name__ == "__main__":
+    scribble() 
