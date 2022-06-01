@@ -4,11 +4,11 @@ def scribble():
     from PIL import ImageGrab,Image
     from os import listdir
     from pathlib import Path
-    import image_maker
+    from image_maker import image_maker
 
     #Lancement de la fenêtre Canvas
     scribble = tk.Tk()
-    C = tk.Canvas(scribble, bg="white", height=440+20, width=440)
+    C = tk.Canvas(scribble, bg="black", height=460, width=440)
     image = False
 
     def change_color():
@@ -26,24 +26,24 @@ def scribble():
         Y = event.y
         
         recup_coord()
-        if bandeau == True:
+        if bandeau == True and y1_final < 460 and x1_final < 440:
             carre = C.create_rectangle(coord, fill = colors[1], outline="")
 
     def right_click(event):
-        global X,Y,colors, bandeau 
+        global X,Y,colors, bandeau, x1_final, y1_final
         X = event.x
         Y = event.y
-        colors = "#ffffff"
+        colors = "#000000"
 
         recup_coord()
-        if bandeau == True:
+        if bandeau == True and y1_final < 460 and x1_final < 440:
             carre = C.create_rectangle(coord, fill = colors, outline="")
 
     scribble.bind('<B1-Motion>',left_click)
     scribble.bind('<B3-Motion>',right_click)
 
     def recup_coord():
-        global X,Y,coord, bandeau
+        global X,Y,coord, bandeau, x1_final, y1_final
         if X//20 == 0 or Y//20 == 0:
             if X//20 == 0 and Y//20 == 0:
                 X+=1
@@ -66,26 +66,34 @@ def scribble():
 
 
     def export_image():
-        global img,image
+        global img,image, x, y, h, w
         x = C.winfo_rootx()
         y = C.winfo_rooty()
         w = C.winfo_width()
         h = C.winfo_height()
-        img= ImageGrab.grab((x, y, x+w, y+h)).save("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".png")
+        img= ImageGrab.grab((x+2, y+20, x+w-4, y+h-4)).save("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".jpg")
         image = True
         
     
     def print_image():
+        global image
         if image == True:
-            
+            image_maker("scribble_creation")
+            image = False
+
+        else:
+            img= ImageGrab.grab((x+2, y+20, x+w-4, y+h-4)).save("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".jpg")
+            image_maker("scribble_creation")
+        
+
 
 
     tk.Button(scribble, text='Exporter image', command=export_image).grid(row = 0, column=1)
-    tk.Button(scribble, text='Afficher image sur les leds', command=print_image).grid(row = 0, column=1)
+    tk.Button(scribble, text='Afficher image sur les leds', command=print_image).grid(row = 0, column=2)
 
 
     #Affichage de la fenêtre Canvas
-    C.grid(row=1, column=0, columnspan=2)
+    C.grid(row=1, column=0, columnspan=3)
     scribble.mainloop()
 
 
