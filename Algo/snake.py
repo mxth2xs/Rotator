@@ -359,4 +359,4 @@ def SNAKEGAME(mode):
 	# +++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 if __name__ == "__main__":
-	SNAKEGAME("NS++")
+	SNAKEGAME("S++")
