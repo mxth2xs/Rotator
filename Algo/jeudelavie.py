@@ -40,7 +40,7 @@ def jeudelavie():
         return autour
 
         
-    def globalcalcul (L,H,table):
+    def globalcalcul(L,H,table):
         around=[]
         for x in range (H):
             around.append([])

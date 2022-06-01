@@ -14,18 +14,18 @@ class NeoPixel(object):
         self.command_count += 1
         if self.command_count >=255:
             self.command_count = 0
-        print(message)
+        #print(message)
         self.ser.write(message)
         response = self.ser.readline()
-        print(response)
+        #print(response)
 
     def show(self):
         message = struct.pack('BBB', ord(':'), self.command_count, ord('s'))
         self.command_count += 1
-        print(message)
+        #print(message)
         self.ser.write(message)
         response = self.ser.readline()
-        print(response)
+        #print(response)
 
     def fillPixels(strand, red, green, blue):
         for i in range(484):
