@@ -2,7 +2,10 @@ def SNAKEGAME():
 	# +------------------- Imports -------------------+ #
 	import time, random
 	from pynput import keyboard
-	import lib.neopixel as neopixel
+	try:
+		from lib.neopixel import NeoPixel
+	except:
+		from Algo.lib.neopixel import NeoPixel
 	# +-----------------------------------------------+ #
 	
 	dry_run = False

@@ -1,7 +1,10 @@
 def jeudelavie():
     global table
     import random
-    from lib.neopixel import NeoPixel
+    try:
+        from lib.neopixel import NeoPixel
+    except:
+        from Algo.lib.neopixel import NeoPixel
 
     #Script pour la configuration des LEDs.
     strand = NeoPixel('COM3')

@@ -3,7 +3,10 @@ def image_maker(auto = False):
     from PIL import Image
     from tkinter import Tk
     from tkinter.filedialog import askopenfilename
-    from lib.neopixel import NeoPixel
+    try:
+        from lib.neopixel import NeoPixel
+    except:
+        from Algo.lib.neopixel import NeoPixel
     from random import choice
     from os import listdir
     from pathlib import Path
@@ -22,7 +25,7 @@ def image_maker(auto = False):
     elif auto == True:
         img = Image.open( Path(str(Path(__file__).parents[1] / 'images')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images'))))
     elif auto == "death_snake":
-        img = Image.open( Path(str(Path(__file__).parents[1] / 'images/death_snake')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/death_snake'))))
+        img = Image.open( Path(str(Path(__file__).parents[1] / 'death_snake')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'death_snake'))))
     else:
         pass
     # +-----------------------------------------------+ #
