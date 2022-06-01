@@ -46,7 +46,7 @@ def scribble():
             else:
                 Y+=1
 
-        if X <= 20:
+        if Y <= 20:
             bandeau = False
         else:
             bandeau = True
