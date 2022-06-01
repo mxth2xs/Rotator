@@ -12,15 +12,15 @@ def SNAKEGAME(mode):
 	# - Liste des options possibles
 		#- Règles :
 			# - Missiles : Des missiles de 2x1 traversent l'écran aléatoirement (mortels)
-			# - Opposé   : snake opposé qui copie les mouvements (mortel)
+			###### - Opposé   : snake opposé qui copie les mouvements (mortel)
 			# - Blink    : food change de position après x sec
-			# - Bombe	 : food devient mortelle
+			# - Bombe	 : va avec Blink : l'ancienne position de la food devient mortelle
 			# - Hidden   : food disparait après x sec
 			
 		#> Difficultée :
-			# S++ ( x5 ):  Missiles, Opposé, Blink, Bombe, Hidden 
-			# S   (x2.5):  Missiles, Opposé, Blink, Bombe 
-			# A   ( x2 ):  Missiles, Opposé, Blink
+			# S++ ( x5 ):  Missiles, #Opposé, Blink, Bombe, Hidden 
+			# S   (x2.5):  Missiles, #Opposé, Blink, Bombe 
+			# A   ( x2 ):  Missiles, #Opposé, Blink
 			# B   (x1.5):  Missiles
 			# D   ( x1 ):  X
 		#> Autres :
@@ -38,7 +38,7 @@ def SNAKEGAME(mode):
 	elif 'B' in mode: MODE = 1
 	elif 'A' in mode: MODE = 2
 	elif 'S' in mode: MODE = 3
-	elif '++' in mode: MODE = 999
+	if '++' in mode: MODE = 999
 
 	
 	# +-----------------------------------------------+ #
@@ -60,6 +60,12 @@ def SNAKEGAME(mode):
 	score = -1
 	leds = []
 	tour = 0
+	#Modes init
+	missiles_gauche = []
+	missiles_droite = []
+	tempo = 0
+	food_bombes = []
+	MOD_tempo_hidden = 5
 	# - Réinitialise les couleurs des LEDs
 	if not DRY: strand.show()
 	# +-----------------------------------------------+ #
@@ -73,6 +79,12 @@ def SNAKEGAME(mode):
 	dir_possible = [(direction+1)%4, (direction+3)%4]
 	# +-----------------------------------------------+ #
 
+	# +------------- Fonction numéro LED -------------+ #
+	def addr_LED(x,y): # inverser à cause de la disposition en zigzag des LEDs. (lignes paires et impaires)
+		if   x%2 == 0: return ((x*22)+y)
+		elif x%2 == 1: return ((x*22)+(21-y))
+	# +-----------------------------------------------+ #
+
 	# +------------- Fonction addnewpiece ------------+ #
 	def addnewpiece(direction, delete):
 		"""
@@ -81,11 +93,11 @@ def SNAKEGAME(mode):
 		:param delete: (bool) enlever ou non le 1er élément des positions.
 		"""
 		if delete == False:
-			if not DRY:
-				if playerpositions[0][0]%2 == 1: strand.setPixelColor((playerpositions[0][0]*22)+(21-playerpositions[0][1]), 0,0,0)
-				else: strand.setPixelColor((playerpositions[0][0]*22)+playerpositions[0][1], 0,0,0)
+			if not DRY: #Eteindre la dernière led du snake.
+				strand.setPixelColor(addr_LED(playerpositions[0][0],playerpositions[0][1]), 0,0,0)
 				strand.show()
 			playerpositions.pop(0)
+			leds.clear()
 		
 		# En fonction de la direction, on ajoute la nouvelle coordonnée de la tete du snake.
 		# - En allant vers la gauche, x est plus grand
@@ -111,12 +123,6 @@ def SNAKEGAME(mode):
 			playerpositions[-1].append(playerpositions[-2][1])
 	# +-----------------------------------------------+ #
 
-	# +------------- Fonction numéro LED -------------+ #
-	def addr_LED(x,y): # inverser à cause de la disposition en zigzag des LEDs. (lignes paires et impaires)
-		if   x%2 == 0: return ((x*22)+y)
-		elif x%2 == 1: return ((x*22)+(21-y))
-	# +-----------------------------------------------+ #
-
 	# +-------------- Fonction drawgame --------------+ #
 	def drawgame():
 		"""Afficher le jeu sur les LEDs !"""
@@ -128,27 +134,43 @@ def SNAKEGAME(mode):
 			if not DRY: strand.setPixelColor(addr_LED(led[0],led[1]), 0,255,0)
 			else: leds.append(addr_LED(led[0],led[1]))
 		
+		# - Modes
+		if not DRY:
+			if  MODE >= 1:
+				for led in missiles_gauche:
+					strand.setPixelColor(addr_LED(led[0],led[1]), 255,0,0)
+				for led in missiles_droite:
+					strand.setPixelColor(addr_LED(led[0],led[1]), 255,0,0)
+
+
+
 		if not DRY:
 			strand.show()
 		else:	#Output text
 			game_status = {
-				"dir" : direction,
+				"tour" : tour,
+				#"tempo" : tempo,
+				#"dir" : direction,
 				"pos" : playerpositions,
-				"addr" : leds,
+				#"addr" : leds,
 				#"score" : score,
-				#"food" : (xfood,yfood),
-				#"dir_possible" : dir_possible
+				"food" : (xfood,yfood),
+				"bombes" : food_bombes,
+				#"dir_possible" : dir_possible,
+				#"missiles" : missiles_gauche+missiles_droite,
 			}
 			print(game_status)
 	# +-----------------------------------------------+ #
 
 	# +---------------- Fonction death ---------------+ #
-	def death():
+	def death(message):
 		"""Pour la mort du snake."""
 		if not DRY:
 			for led in playerpositions:
 				strand.setPixelColor(addr_LED(led[0],led[1]), 0,0,0)
 			strand.show()
+		else:
+			print(f"Rip. {message}")
 	
 		#récupérer le record
 		f = open('./Snake_ext/snake_highscore.txt', 'r')
@@ -171,9 +193,7 @@ def SNAKEGAME(mode):
 
 	# +------- Fonction et code pour les inputs ------+ #
 	def key_press(key):
-		"""
-		:param key: (z,s,d,q) Touches pour diriger le snake.
-		"""
+		""":param key: (z,s,d,q) Touches pour diriger le snake."""
 		if   key.char=='z' and 0 in dir_possible:  keys[0]=True
 		elif key.char=='d' and 1 in dir_possible:  keys[1]=True
 		elif key.char=='s' and 2 in dir_possible:  keys[2]=True
@@ -196,7 +216,45 @@ def SNAKEGAME(mode):
 
 		#variable qui incrémente de 1 à chaque fois,
 		tour += 1
-		# si var >
+
+		#Temporisation pour les missiles
+		if tempo > 0:
+			tempo -= 1
+
+		if MOD_tempo_hidden > 0:
+			tempo -= 1
+
+		# Blink : déplacer la nourriture tout les 20 tours.
+		if MODE >= 2 and tour%20 == 0:
+			foodonscreen = False
+			if not DRY:strand.setPixelColor(addr_LED(xfood,yfood), 0,0,0)
+			if MODE >= 3: # Bombes : l'ancienne position de la food devient mortelle
+				food_bombes.append([xfood,yfood])
+				if not DRY:strand.setPixelColor(addr_LED(xfood,yfood), 255,0,0) 
+
+		# Hidden : faire disparaitre la nourriture 5 tours après son apparition.
+		if MODE > 3 and MOD_tempo_hidden == 0: 
+			for i in ([[xfood,yfood]]+food_bombes):
+				if not DRY:strand.setPixelColor(addr_LED(i[0],i[1]), 0,0,0)
+
+		# - Déplacer les missiles
+		if tour >= 1:
+			for i in missiles_gauche: 
+				if i[0] >= 21: missiles_gauche.remove(i)
+				else: i[0] += 1
+			for i in missiles_droite: 
+				if i[0] <= 0: missiles_droite.remove(i)
+				else: i[0] -= 1
+
+		if MODE >=1: 
+			# +----- MISSILES -----+ #
+			if tempo==0 and random.randint(1,5) == 1: # 20% de chance de missile
+				tempo = 5
+				for i in range(random.randint(1,3)): 
+					missiles_gauche.append([0,random.randint(1,height-1)])	# position random
+					missiles_droite.append([21,random.randint(1,height-1)])
+			# +--------------------+ #
+
 		# +-------------------------------------------+ #
 
 
@@ -226,7 +284,12 @@ def SNAKEGAME(mode):
 		else: 
 			delete = False
 			addnewpiece(direction, delete)
+		
+		
+
 		# +-------------------------------------------+ #
+
+
 
 		# +-------- Affichage de la nourriture -------+ #
 		if foodonscreen == False:
@@ -234,10 +297,11 @@ def SNAKEGAME(mode):
 			while foodcords:
 				xfood = random.randint(0,width)
 				yfood = random.randint(0,height-1)
-				score += 1
+				MOD_tempo_hidden = 5
 				foodcords = False
 				if [xfood, yfood] in playerpositions:
 					foodcords = True
+					score += 1
 				foodonscreen = True
 		# +-----------------------------------------------+ #
 
@@ -248,13 +312,19 @@ def SNAKEGAME(mode):
 		for i in snake_body:
 			if i in snake_head:
 				Game = False
-				death()
-	
+				death("You ate snake...")
+
+		# Conditions de mort MODES
+		explosives = missiles_gauche + missiles_droite + food_bombes
+		for i in explosives:
+			if i in playerpositions:
+				Game = False
+				death("Boom.")
 		# - Si le snake sort du plan (gauche ou droite) :
 		else: # Ce 'else' est relié à la condition de nourriture à l'écran : 'if foodonscreen == False'.
 			if playerpositions[-1][0] < 0 or playerpositions[-1][0] > width :
 				Game = False
-				death()
+				death("You can't leave.")
 		# +-----------------------------------------------+ #
 
 		# +------------ Plan infini (haut-bas) -----------+ #
@@ -263,6 +333,7 @@ def SNAKEGAME(mode):
 					playerpositions[-1][1]=height-1
 				if playerpositions[-1][1] > height-1:
 					playerpositions[-1][1]=0	
+				
 				drawgame()
 		# +-----------------------------------------------+ #
 	
@@ -271,4 +342,4 @@ def SNAKEGAME(mode):
 	# +++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 if __name__ == "__main__":
-	SNAKEGAME("dry")
+	SNAKEGAME("S++")
