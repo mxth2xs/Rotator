@@ -149,7 +149,7 @@ def SNAKEGAME(mode):
 		else:	#Output text
 			game_status = {
 				"tour" : tour,
-				#"tempo" : tempo,
+				"tempo" : tempo,
 				#"dir" : direction,
 				"pos" : playerpositions,
 				#"addr" : leds,
@@ -157,7 +157,7 @@ def SNAKEGAME(mode):
 				"food" : (xfood,yfood),
 				"bombes" : food_bombes,
 				#"dir_possible" : dir_possible,
-				#"missiles" : missiles_gauche+missiles_droite,
+				"missiles" : missiles_gauche+missiles_droite,
 			}
 			print(game_status)
 	# +-----------------------------------------------+ #
@@ -222,7 +222,7 @@ def SNAKEGAME(mode):
 			tempo -= 1
 
 		if MOD_tempo_hidden > 0:
-			tempo -= 1
+			MOD_tempo_hidden -= 1
 
 		# Blink : déplacer la nourriture tout les 20 tours.
 		if MODE >= 2 and tour%20 == 0:
@@ -248,7 +248,7 @@ def SNAKEGAME(mode):
 
 		if MODE >=1: 
 			# +----- MISSILES -----+ #
-			if tempo==0 and random.randint(1,5) == 1: # 20% de chance de missile
+			if tempo==0 and random.randint(1,1) == 1: # 20% de chance de missile
 				tempo = 5
 				for i in range(random.randint(1,3)): 
 					missiles_gauche.append([0,random.randint(1,height-1)])	# position random
@@ -342,4 +342,4 @@ def SNAKEGAME(mode):
 	# +++++++++++++++++++++++++++++++++++++++++++++++++ #
 
 if __name__ == "__main__":
-	SNAKEGAME("S++")
+	SNAKEGAME("NS++")
