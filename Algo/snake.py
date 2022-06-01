@@ -5,7 +5,7 @@ def SNAKEGAME():
 	import lib.neopixel as neopixel
 	# +-----------------------------------------------+ #
 	
-	dry_run = True
+	dry_run = False
 
 	# +----------------- Config LEDs -----------------+ #
 	if not dry_run: strand = neopixel.NeoPixel('COM3')
@@ -110,7 +110,7 @@ def SNAKEGAME():
 				"dir_possible" : dir_possible
 			}
 			print(game_status['dir'], game_status['pos'], game_status['addr'])
-	# +-----------------------------------------sds------+ #
+	# +-----------------------------------------------+ #
 
 	# +---------------- Fonction death ---------------+ #
 	def death():
