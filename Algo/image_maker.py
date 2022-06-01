@@ -1,9 +1,12 @@
-def image_maker():
+def image_maker(auto = False):
     # +------------------- Imports -------------------+ #
     from PIL import Image
     from tkinter import Tk
     from tkinter.filedialog import askopenfilename
     from lib.neopixel import NeoPixel
+    from random import choice
+    from os import listdir
+    from pathlib import Path
     # +-----------------------------------------------+ #
 
 	# +----------------- Config LEDs -----------------+ #
@@ -12,9 +15,13 @@ def image_maker():
     # +-----------------------------------------------+ #
 
     # +---------------- Import d'image ---------------+ #
-    Tk().withdraw()
-    filename = askopenfilename()
-    img = Image.open(filename)
+    if auto == False:
+        Tk().withdraw()
+        filename = askopenfilename()
+        img = Image.open(filename)
+    elif auto == True:
+        img = Image.open( Path(str(Path(__file__).parents[1] / 'images')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images'))))
+
     # +-----------------------------------------------+ #
 
     # +-------- Redimension de l'image (22x22) -------+ #
@@ -45,4 +52,4 @@ def image_maker():
     # +-----------------------------------------------+ #
 
 if __name__ == "__main__":
-    image_maker()
+    image_maker(True)
