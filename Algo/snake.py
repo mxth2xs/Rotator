@@ -135,29 +135,40 @@ def SNAKEGAME(mode):
 			else: leds.append(addr_LED(led[0],led[1]))
 		
 		# - Modes
-		if not DRY:
-			if  MODE >= 1:
-				for led in missiles_gauche:
+		led_missile_g = []
+		led_missile_d = []
+		
+		if  MODE >= 1:
+			for led in missiles_gauche:
+				led_missile_g.append([addr_LED(led[0]-1,led[1]), addr_LED(led[0],led[1])])
+				if not DRY:
 					strand.setPixelColor(addr_LED(led[0],led[1]), 255,0,0)
-				for led in missiles_droite:
+					if led[0]-1 >= 0:
+						strand.setPixelColor(addr_LED(led[0]-1,led[1]), 255,0,0)
+			for led in missiles_droite:
+				led_missile_d.append([addr_LED(led[0]+1,led[1]), addr_LED(led[0],led[1])])
+				if not DRY:
 					strand.setPixelColor(addr_LED(led[0],led[1]), 255,0,0)
-
+					if led[0]-1 < 484:
+						strand.setPixelColor(addr_LED(led[0]+1,led[1]), 255,0,0)
 
 
 		if not DRY:
 			strand.show()
 		else:	#Output text
 			game_status = {
-				"tour" : tour,
-				"tempo" : tempo,
+				#"tour" : tour,
+				#"tempo" : tempo,
 				#"dir" : direction,
-				"pos" : playerpositions,
+				#"pos" : playerpositions,
 				#"addr" : leds,
 				#"score" : score,
-				"food" : (xfood,yfood),
-				"bombes" : food_bombes,
+				#"food" : (xfood,yfood),
+				#"bombes" : food_bombes,
 				#"dir_possible" : dir_possible,
-				"missiles" : missiles_gauche+missiles_droite,
+				#"missiles" : missiles_gauche+missiles_droite,
+				"miss_L_G" : led_missile_g,
+				"miss_L_D" : led_missile_d,
 			}
 			print(game_status)
 	# +-----------------------------------------------+ #
@@ -240,11 +251,11 @@ def SNAKEGAME(mode):
 		# - Déplacer les missiles
 		if tour >= 1:
 			for i in missiles_gauche: 
-				if not DRY: strand.setPixelColor(addr_LED(i[0],i[1]), 0,0,0)
+				#if not DRY: strand.setPixelColor(addr_LED(i[0],i[1]), 0,0,0)
 				if i[0] >= 21: missiles_gauche.remove(i)
 				else: i[0] += 1
 			for i in missiles_droite: 
-				if not DRY: strand.setPixelColor(addr_LED(i[0],i[1]), 0,0,0)
+				#if not DRY: strand.setPixelColor(addr_LED(i[0],i[1]), 0,0,0)
 				if i[0] <= 0: missiles_droite.remove(i)
 				else: i[0] -= 1
 
