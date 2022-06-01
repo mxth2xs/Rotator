@@ -9,7 +9,7 @@ def scribble():
     #Lancement de la fenêtre Canvas
     scribble = tk.Tk()
     C = tk.Canvas(scribble, bg="black", height=460, width=440)
-    image = False
+    image_pixel = False
 
     def change_color():
         global colors
@@ -64,7 +64,6 @@ def scribble():
         y2_final = (Y//20)*20+20
         coord = x1_final, y1_final, x2_final, y2_final
 
-
     def export_image():
         global img,image, x, y, h, w
         x = C.winfo_rootx()
@@ -74,7 +73,6 @@ def scribble():
         img= ImageGrab.grab((x+2, y+20, x+w-4, y+h-4)).save("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".jpg")
         image = True
         
-    
     def print_image():
         global image
         if image == True:
@@ -84,12 +82,9 @@ def scribble():
         else:
             img= ImageGrab.grab((x+2, y+20, x+w-4, y+h-4)).save("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".jpg")
             image_maker("scribble_creation")
-        
 
-
-
-    tk.Button(scribble, text='Exporter image', command=export_image).grid(row = 0, column=1)
-    tk.Button(scribble, text='Afficher image sur les leds', command=print_image).grid(row = 0, column=2)
+    tk.Button(scribble, text='Exporter image_pixel', command=export_image).grid(row = 0, column=1)
+    tk.Button(scribble, text='Afficher image_pixel sur les leds', command=print_image).grid(row = 0, column=2)
 
 
     #Affichage de la fenêtre Canvas
