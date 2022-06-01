@@ -45,7 +45,7 @@ def SNAKEGAME():
 		"""
 		if delete == False:
 			if not dry_run:
-				if playerpositions[0][0]%2 == 1: strand.setPixelColor((playerpositions[0][0]*22)+(22-playerpositions[0][1]), 0,0,0)
+				if playerpositions[0][0]%2 == 1: strand.setPixelColor((playerpositions[0][0]*22)+(21-playerpositions[0][1]), 0,0,0)
 				else: strand.setPixelColor((playerpositions[0][0]*22)+playerpositions[0][1], 0,0,0)
 				strand.show()
 			playerpositions.pop(0)
