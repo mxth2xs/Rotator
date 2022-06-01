@@ -25,7 +25,9 @@ def image_maker(auto = False):
     elif auto == True:
         img = Image.open( Path(str(Path(__file__).parents[1] / 'images')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images'))))
     elif auto == "death_snake":
-        img = Image.open( Path(str(Path(__file__).parents[1] / 'death_snake')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'death_snake'))))
+        img = Image.open( Path(str(Path(__file__).parents[1] / 'images/death_snake')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/death_snake'))))
+    elif auto == "scribble":
+        img = Image.open( Path(str(Path(__file__).parents[1] / 'images/scribble_creation')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))))
     else:
         pass
     # +-----------------------------------------------+ #
