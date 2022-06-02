@@ -1,8 +1,8 @@
 def scribble():
     import tkinter as tk
     from tkinter.colorchooser import askcolor
-    from PIL import ImageGrab,Image
-    from os import listdir
+    from PIL import ImageGrab,Image,ImageColor
+    from os import listdir,remove
     from pathlib import Path
     from image_maker import image_maker
 
@@ -12,17 +12,10 @@ def scribble():
     image_pixel = False
 
     def change_color():
-        global colors
+        global colors_rgb, colors
         colors = askcolor(title="Tkinter Color Chooser")
         scribble.configure(bg=colors[1])
-
-    def creation_list_color(led, r, g, b):
-        list_color = []
-        for i in range(22):
-            list_color.append([])
-            for j in range(22):
-                list_color[i].append([led, r, g, b])
-        return list_color
+        colors_rgb = ImageColor.getcolor(colors[1], "RGB")
 
     tk.Button(scribble, text='Choisir une couleur', command=change_color).grid(row=0, column=0)
 
@@ -40,7 +33,7 @@ def scribble():
     list_color_creation()
 
     def left_click(event):
-        global X,Y, colors, bandeau,click,list_color
+        global X,Y, colors_rgb, bandeau,click,list_color
         click = True
         X = event.x
         Y = event.y
@@ -52,26 +45,27 @@ def scribble():
                 led = (Y-1)*22+X
 
             else:
-                led = Y*22-x
+                led = Y*22-X
 
             carre = C.create_rectangle(coord, fill = colors[1], outline="")
-<<<<<<< HEAD
-            x = coord[0]//22
-            y = coord[1]//22
+
+            # Pour mettre dans une liste pour afficher avec image maker
+            x = coord[0]//20
+            y = (coord[1]//20)-1
 
             if y%2 == 0:
-                led = x + 22*(y-1)
-            else:
-                led = 22*y-x
+                led = 22*x+y
 
-            list_color[X][Y][0] = led
-            list_color[X][Y][1] = colors[1][0]
-            list_color[X][Y][2] = colors[1][1]
-            list_color[X][Y][3] = colors[1][2]
-=======
-            creation_list_color(led, coord[0], coord[1], coord[2])
-            print(creation_list_color())
->>>>>>> e0f81cb2b01d457085d8de29eaf4f807b072fa39
+            else:
+                led = 22*x+21-y
+
+            
+            list_color[y][x][0] = led
+            list_color[y][x][1] = colors_rgb[0]
+            list_color[y][x][2] = colors_rgb[1]
+            list_color[y][x][3] = colors_rgb[2]
+            print(list_color)
+            
 
     def right_click(event):
         global X,Y,colors, bandeau, x1_final, y1_final
@@ -126,9 +120,11 @@ def scribble():
         else:
             img= ImageGrab.grab((x+2, y+20, x+w-4, y+h-4)).save("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".jpg")
             image_maker("scribble_creation", list_color)
+            remove("images/scribble_creation/IMAGE-"+ str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))+1) +".jpg")
 
     def destroy():
         C.delete('all')
+        list_color_creation()
 
     tk.Button(scribble, text='Exporter image_pixel', command=export_image).grid(row = 0, column=1)
     tk.Button(scribble, text='Afficher image_pixel sur les leds', command=print_image).grid(row = 0, column=2)

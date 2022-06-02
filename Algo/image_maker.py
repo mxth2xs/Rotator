@@ -1,5 +1,5 @@
-def image_maker(auto = False):
-    global img
+def image_maker(*args):
+    global img,auto
     # +------------------- Imports -------------------+ #
     from PIL import Image
     from tkinter import Tk
@@ -47,28 +47,28 @@ def image_maker(auto = False):
         # +-----------------------------------------------+ #
 
     def pixel_art(list_color):
-        for x in range(len(list_color)):
-            for y in range(list_color[x]):
-               
-
-                strand.setPixelColor(X, rgb[0], rgb[1], rgb[2])
-                strand.show()
+        for y in range(len(list_color)):
+            for x in range(len(list_color[y])):
+                
+                if list_color[y][x][0] != "x":
+                    strand.setPixelColor(int(list_color[y][x][0]), int(list_color[y][x][1]), int(list_color[y][x][2]), int(list_color[y][x][3]))
+                    strand.show()
 
     # +---------------- Import d'image ---------------+ #
-    if auto == False:
+    if args[0] == False:
         Tk().withdraw()
         filename = askopenfilename()
         img = Image.open(filename)
         run_normal()
-    elif auto == True:
+    elif args[0] == True:
         img = Image.open( Path(str(Path(__file__).parents[1] / 'images')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images'))))
         run_normal()
-    elif auto == "death_snake":
+    elif args[0] == "death_snake":
         img = Image.open( Path(str(Path(__file__).parents[1] / 'images/death_snake')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/death_snake'))))
         run_normal()
-    elif auto == "scribble_creation":
+    elif args[0] == "scribble_creation":
         img = Image.open( Path(str(Path(__file__).parents[1] / 'images/scribble_creation')+ "\\" + "IMAGE-" + str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))) + ".jpg"))
-        pixel_art(list_color)
+        pixel_art(args[1])
     else:
         pass
     # +-----------------------------------------------+ #
