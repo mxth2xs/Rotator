@@ -24,10 +24,10 @@ def scribble():
 
         list_color = []
     
-        for i in range(22):
+        for y in range(22):
             list_color.append([])
-            for j in range(22):
-                list_color[i].append(["x", "r", "g", "b"])
+            for x in range(22):
+                list_color[y].append(["x", "r", "g", "b"])
         return list_color
 
     list_color_creation()
@@ -40,12 +40,6 @@ def scribble():
         
         recup_coord()
         if bandeau == True and y1_final < 460 and x1_final < 440:
-            
-            if Y%2 == 0:
-                led = (Y-1)*22+X
-
-            else:
-                led = Y*22-X
 
             carre = C.create_rectangle(coord, fill = colors[1], outline="")
 
@@ -54,10 +48,10 @@ def scribble():
             y = (coord[1]//20)-1
 
             if y%2 == 0:
-                led = 22*x+y
+                led = y*21+x+y
 
             else:
-                led = 22*x+21-y
+                led = (y+1)*21+y-x
 
             
             list_color[y][x][0] = led

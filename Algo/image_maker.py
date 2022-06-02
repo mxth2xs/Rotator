@@ -16,6 +16,7 @@ def image_maker(*args):
 	# +----------------- Config LEDs -----------------+ #
     strand = NeoPixel('COM3')
     num_led = 484
+    strand.show()
     # +-----------------------------------------------+ #
 
     def run_normal():
@@ -47,6 +48,7 @@ def image_maker(*args):
         # +-----------------------------------------------+ #
 
     def pixel_art(list_color):
+        strand.show()
         for y in range(len(list_color)):
             for x in range(len(list_color[y])):
                 
