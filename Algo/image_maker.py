@@ -32,17 +32,18 @@ def image_maker(*args):
             liste_colors = list(imgSmall.getdata())
 
         #- Enlever la valeur de la transparence si 'png' (RGBA -> RGB).
-        if img.format.lower() == 'png':
+        if img.mode == 'RGBA':
             for color in range(len(liste_colors)):
-                liste_colors[color] = liste_colors[color][:-1] 
+                liste_colors[color] = liste_colors[color][:-1]
         # +-----------------------------------------------+ #
         
         # +--------------- Afficher l'image --------------+ #
         # - Afficher sur PC (optionnel)
         imgSmall.show()
 
-        # - Afficher sur LEDs   
+        # - Afficher sur LEDs 
         for led in range(num_led):
+            print(liste_colors)
             strand.setPixelColor(led, liste_colors[led][0], liste_colors[led][1], liste_colors[led][2])
             strand.show()
         # +-----------------------------------------------+ #
@@ -63,7 +64,7 @@ def image_maker(*args):
         img = Image.open(filename)
         run_normal()
     elif args[0] == True:
-        img = Image.open( Path(str(Path(__file__).parents[1] / 'images')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images'))))
+        img = Image.open( Path(str(Path(__file__).parents[1] / 'images/random')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/random'))))
         run_normal()
     elif args[0] == "death_snake":
         img = Image.open( Path(str(Path(__file__).parents[1] / 'images/death_snake')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/death_snake'))))
