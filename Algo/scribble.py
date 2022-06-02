@@ -16,6 +16,13 @@ def scribble():
         colors = askcolor(title="Tkinter Color Chooser")
         scribble.configure(bg=colors[1])
 
+    def creation_list_color(led, r, g, b):
+        list_color = []
+        for i in range(22):
+            list_color.append([])
+            for j in range(22):
+                list_color[i].append([led, r, g, b])
+        return list_color
 
     tk.Button(scribble, text='Choisir une couleur', command=change_color).grid(row=0, column=0)
 
@@ -40,7 +47,15 @@ def scribble():
         
         recup_coord()
         if bandeau == True and y1_final < 460 and x1_final < 440:
+            
+            if Y%2 == 0:
+                led = (Y-1)*22+X
+
+            else:
+                led = Y*22-x
+
             carre = C.create_rectangle(coord, fill = colors[1], outline="")
+<<<<<<< HEAD
             x = coord[0]//22
             y = coord[1]//22
 
@@ -53,6 +68,10 @@ def scribble():
             list_color[X][Y][1] = colors[1][0]
             list_color[X][Y][2] = colors[1][1]
             list_color[X][Y][3] = colors[1][2]
+=======
+            creation_list_color(led, coord[0], coord[1], coord[2])
+            print(creation_list_color())
+>>>>>>> e0f81cb2b01d457085d8de29eaf4f807b072fa39
 
     def right_click(event):
         global X,Y,colors, bandeau, x1_final, y1_final
