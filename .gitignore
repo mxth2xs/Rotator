@@ -1,4 +1,5 @@
-Algo/__pycache__/
-Algo/lib/__pycache__/
-/UI/__pycache__/
+rotator/algo/__pycache__/
+rotator/algo/lib/__pycache__/
+rotator/UI/__pycache__/
 /__pycache__/
+/.vscode/
