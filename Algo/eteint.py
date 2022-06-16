@@ -1,6 +1,6 @@
 def eteint():
 
-    from lib.neopixel import NeoPixel
+    from lib.neopixel_arduino import NeoPixel
 
     #Script pour la configuration des LEDs.
     strand = NeoPixel('COM3')

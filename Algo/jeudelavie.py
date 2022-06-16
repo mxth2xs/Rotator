@@ -2,9 +2,9 @@ def jeudelavie():
     global table
     import random
     try:
-        from lib.neopixel import NeoPixel
+        from lib.neopixel_arduino import NeoPixel
     except:
-        from Algo.lib.neopixel import NeoPixel
+        from Algo.lib.neopixel_arduino import NeoPixel
     from player import strand
 
     table=[]
@@ -89,9 +89,9 @@ def jeudelavie():
 if __name__ == "__main__":
     # +----------------- Config LEDs -----------------+ #
     try:
-        from lib.neopixel import NeoPixel
+        from lib.neopixel_arduino import NeoPixel
     except:
-        from Algo.lib.neopixel import NeoPixel
+        from Algo.lib.neopixel_arduino import NeoPixel
 
     strand = NeoPixel('COM3')
     num_led = 484

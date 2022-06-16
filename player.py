@@ -8,7 +8,7 @@ from UI.graphiqueSnakeFin import snakeFin
 
 # +----------------- Config LEDs -----------------+ #
 
-from Algo.lib.neopixel import NeoPixel
+from Algo.lib.neopixel_arduino import NeoPixel
 
 strand = NeoPixel('COM3')
 num_led = 484

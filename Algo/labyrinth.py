@@ -1,9 +1,9 @@
 from turtle import position
 from pynput import keyboard
 try:
-    from lib.neopixel import NeoPixel
+    from lib.neopixel_arduino import NeoPixel
 except:
-    from Algo.lib.neopixel import NeoPixel
+    from Algo.lib.neopixel_arduino import NeoPixel
 from image_maker import image_maker
 
 def labyrinth(list_color):
@@ -101,9 +101,9 @@ if __name__ == "__main__":
 
     # +----------------- Config LEDs -----------------+ #
     try:
-        from lib.neopixel import NeoPixel
+        from lib.neopixel_arduino import NeoPixel
     except:
-        from Algo.lib.neopixel import NeoPixel
+        from Algo.lib.neopixel_arduino import NeoPixel
 
     strand = NeoPixel('COM3')
     num_led = 484
