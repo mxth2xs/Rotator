@@ -1,8 +1,4 @@
 def labyrinth(list_color):
-    try:
-        from lib.neopixel_arduino import NeoPixel_arduino
-    except:
-        from Algo.lib.neopixel_arduino import NeoPixel_arduino
     from pynput import keyboard
     import time
     from image_maker import image_maker

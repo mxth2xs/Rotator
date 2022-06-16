@@ -1,18 +1,14 @@
 # +------------------- Imports -------------------+ #
 import tkinter as tk
-from Algo.image_maker import image_maker
-from Algo.snake import SNAKEGAME
-from Algo.jeudelavie import jeudelavie
-from UI.graphiqueSnakeFin import snakeFin
-# +-----------------------------------------------+ #
+from rotator.algo.image_maker import image_maker
+from rotator.algo.snake import SNAKEGAME
+from rotator.algo.jeudelavie import jeudelavie
+from rotator.UI.graphiqueSnakeFin import snakeFin
+import sys
+  
+#Je créé le PATH Rotator, ce qui me permettra d'appeler le fichier config
+sys.path.append('rotator')
 
-# +----------------- Config LEDs -----------------+ #
-
-from Algo.lib.neopixel_arduino import NeoPixel
-
-strand = NeoPixel('COM3')
-num_led = 484
-strand.show()
 # +-----------------------------------------------+ #
 
 # +------------------ Couleurs -------------------+ #

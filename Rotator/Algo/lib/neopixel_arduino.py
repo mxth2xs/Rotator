@@ -31,14 +31,10 @@ class NeoPixel_arduino(object):
         for i in range(484):
             strand.setPixelColor(i, red, green, blue)
 
-    def start():
-        strand = NeoPixel('COM3')
-        strand.show()
-
 
 if __name__ == "__main__":
 
-    strand = NeoPixel('COM3')
+    strand = NeoPixel_arduino('COM3')
 
     for i in range(484):
         strand.setPixelColor(i, 255, 0, 0)

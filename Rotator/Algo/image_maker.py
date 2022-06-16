@@ -4,13 +4,10 @@ def image_maker(*args):
     from PIL import Image
     from tkinter import Tk
     from tkinter.filedialog import askopenfilename
-    try:
-        from lib.neopixel_arduino import NeoPixel_arduino
-    except:
-        from Algo.lib.neopixel_arduino import NeoPixel_arduino
     from random import choice
     from os import listdir
     from pathlib import Path
+    from config import strand, num_led, width, height
     # +-----------------------------------------------+ #
 
     def run_normal():
@@ -37,7 +34,6 @@ def image_maker(*args):
 
         # - Afficher sur LEDs 
         for led in range(num_led):
-            print(liste_colors)
             strand.setPixelColor(led, liste_colors[led][0], liste_colors[led][1], liste_colors[led][2])
             strand.show()
         # +-----------------------------------------------+ #
@@ -52,36 +48,29 @@ def image_maker(*args):
                     strand.show()
 
     # +---------------- Import d'image ---------------+ #
-    if args[0] == False:
+    try:
+        if args[0] == False:
+            Tk().withdraw()
+            filename = askopenfilename()
+            img = Image.open(filename)
+            run_normal()
+        elif args[0] == True:
+            img = Image.open( Path(str(Path(__file__).parents[1] / 'images/random')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/random'))))
+            run_normal()
+        elif args[0] == "death_snake":
+            img = Image.open( Path(str(Path(__file__).parents[1] / 'images/death_snake')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/death_snake'))))
+            run_normal()
+        elif args[0] == "scribble_creation":
+            img = Image.open( Path(str(Path(__file__).parents[1] / 'images/scribble_creation')+ "\\" + "IMAGE-" + str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))) + ".jpg"))
+            pixel_art(args[1])
+        else:
+            pass
+    except:
         Tk().withdraw()
         filename = askopenfilename()
         img = Image.open(filename)
         run_normal()
-    elif args[0] == True:
-        img = Image.open( Path(str(Path(__file__).parents[1] / 'images/random')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/random'))))
-        run_normal()
-    elif args[0] == "death_snake":
-        img = Image.open( Path(str(Path(__file__).parents[1] / 'images/death_snake')+ "\\" +choice(listdir(Path(__file__).parents[1] / 'images/death_snake'))))
-        run_normal()
-    elif args[0] == "scribble_creation":
-        img = Image.open( Path(str(Path(__file__).parents[1] / 'images/scribble_creation')+ "\\" + "IMAGE-" + str(len(listdir(Path(__file__).parents[1] / 'images/scribble_creation'))) + ".jpg"))
-        pixel_art(args[1])
-    else:
-        pass
     # +-----------------------------------------------+ #
 
 if __name__ == "__main__":
-
-    # +----------------- Config LEDs -----------------+ #
-    try:
-        from lib.neopixel_arduino import NeoPixel_arduino
-    except:
-        from Algo.lib.neopixel_arduino import NeoPixel_arduino
-
-    strand = NeoPixel_arduino('COM3')
-    num_led = 484
-    strand.show()
-    # +-----------------------------------------------+ #
-
-
     image_maker(False)
