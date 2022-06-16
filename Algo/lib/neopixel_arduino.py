@@ -3,7 +3,7 @@ import struct
 import serial
 import time
 
-class NeoPixel(object):
+class NeoPixel_arduino(object):
     def __init__(self, port):
         self.port = port
         self.ser = serial.Serial(self.port, 115200, timeout=60)

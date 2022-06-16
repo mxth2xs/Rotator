@@ -5,9 +5,9 @@ def image_maker(*args):
     from tkinter import Tk
     from tkinter.filedialog import askopenfilename
     try:
-        from lib.neopixel_arduino import NeoPixel
+        from lib.neopixel_arduino import NeoPixel_arduino
     except:
-        from Algo.lib.neopixel_arduino import NeoPixel
+        from Algo.lib.neopixel_arduino import NeoPixel_arduino
     from random import choice
     from os import listdir
     from pathlib import Path
@@ -74,11 +74,11 @@ if __name__ == "__main__":
 
     # +----------------- Config LEDs -----------------+ #
     try:
-        from lib.neopixel_arduino import NeoPixel
+        from lib.neopixel_arduino import NeoPixel_arduino
     except:
-        from Algo.lib.neopixel_arduino import NeoPixel
+        from Algo.lib.neopixel_arduino import NeoPixel_arduino
 
-    strand = NeoPixel('COM3')
+    strand = NeoPixel_arduino('COM3')
     num_led = 484
     strand.show()
     # +-----------------------------------------------+ #

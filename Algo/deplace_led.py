@@ -1,15 +1,15 @@
 def labyrinth(list_color):
     try:
-        from lib.neopixel_arduino import NeoPixel
+        from lib.neopixel_arduino import NeoPixel_arduino
     except:
-        from Algo.lib.neopixel_arduino import NeoPixel
+        from Algo.lib.neopixel_arduino import NeoPixel_arduino
     from pynput import keyboard
     import time
     from image_maker import image_maker
 
     global position_x, position_y    
     
-    strand = NeoPixel('COM3')
+    strand = NeoPixel_arduino('COM3')
     strand.show()
 
     position_x, position_y = 0,21
@@ -93,11 +93,10 @@ if __name__ == "__main__":
 
     # +----------------- Config LEDs -----------------+ #
     try:
-        from lib.neopixel_arduino import NeoPixel
-    except:
-        from Algo.lib.neopixel_arduino import NeoPixel
+        from lib.neopixel_arduino import NeoPixel_arduino
+        from Algo.lib.neopixel_arduino import NeoPixel_arduino
 
-    strand = NeoPixel('COM3')
+    strand = NeoPixel_arduino('COM3')
     num_led = 484
     strand.show()
     # +-----------------------------------------------+ #

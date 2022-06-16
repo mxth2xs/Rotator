@@ -3,9 +3,9 @@ def SNAKEGAME(mode):
 	import time, random
 	from pynput import keyboard
 	try:
-		from lib.neopixel_arduino import NeoPixel
+		from lib.neopixel_arduino import NeoPixel_arduino
 	except:
-		from Algo.lib.neopixel_arduino import NeoPixel
+		from Algo.lib.neopixel_arduino import NeoPixel_arduino
 	# +-----------------------------------------------+ #
 	
 	# +------------------- Options -------------------+ #
@@ -44,7 +44,7 @@ def SNAKEGAME(mode):
 	# +-----------------------------------------------+ #
 
 	# +----------------- Config LEDs -----------------+ #
-	if not DRY: strand = NeoPixel('COM3')
+	if not DRY: strand = NeoPixel_arduino('COM3')
 	num_led = 22*22
 	width=22
 	height = num_led//width
