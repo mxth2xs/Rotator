@@ -6,6 +6,15 @@ from Algo.jeudelavie import jeudelavie
 from UI.graphiqueSnakeFin import snakeFin
 # +-----------------------------------------------+ #
 
+# +----------------- Config LEDs -----------------+ #
+
+from Algo.lib.neopixel import NeoPixel
+
+strand = NeoPixel('COM3')
+num_led = 484
+strand.show()
+# +-----------------------------------------------+ #
+
 # +------------------ Couleurs -------------------+ #
 c_fond = "#505166"
 c_bouton = "#69657f"

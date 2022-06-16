@@ -1,14 +1,12 @@
-try:
-    from lib.neopixel import NeoPixel
-except:
-    from Algo.lib.neopixel import NeoPixel
-from pynput import keyboard
-import time
-from image_maker import image_maker
-
-
-
 def labyrinth(list_color):
+    try:
+        from lib.neopixel import NeoPixel
+    except:
+        from Algo.lib.neopixel import NeoPixel
+    from pynput import keyboard
+    import time
+    from image_maker import image_maker
+
     global position_x, position_y    
     
     strand = NeoPixel('COM3')
@@ -93,4 +91,15 @@ if __name__ == "__main__":
     'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], ['x', 'r', 'g', 'b'], [461, 255, 0, 0]], [[483, 0, 0, 255], ['x', 'r', 'g', 'b'], [481, 255, 0, 0], [480, 255, 0, 0], [479, 255, 0, 0], [478, 255, 0, 0], [477, 255, 0, 0], [476, 255, 0, 0], [475, 255, 0, 0], [474, 255, 0, 0], 
     [473, 255, 0, 0], [472, 255, 0, 0], [471, 255, 0, 0], [470, 255, 0, 0], [469, 255, 0, 0], [468, 255, 0, 0], [467, 255, 0, 0], [466, 255, 0, 0], [465, 255, 0, 0], [464, 255, 0, 0], [463, 255, 0, 0], [462, 255, 0, 0]]]
 
+    # +----------------- Config LEDs -----------------+ #
+    try:
+        from lib.neopixel import NeoPixel
+    except:
+        from Algo.lib.neopixel import NeoPixel
+
+    strand = NeoPixel('COM3')
+    num_led = 484
+    strand.show()
+    # +-----------------------------------------------+ #
+    
     labyrinth(list_color)

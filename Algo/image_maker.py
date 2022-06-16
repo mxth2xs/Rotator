@@ -13,12 +13,6 @@ def image_maker(*args):
     from pathlib import Path
     # +-----------------------------------------------+ #
 
-	# +----------------- Config LEDs -----------------+ #
-    strand = NeoPixel('COM3')
-    num_led = 484
-    strand.show()
-    # +-----------------------------------------------+ #
-
     def run_normal():
         # +-------- Redimension de l'image (22x22) -------+ #
         # - Si l'image a déjà les bonnes dimensions, on demande directement la liste de couleurs.
@@ -77,4 +71,17 @@ def image_maker(*args):
     # +-----------------------------------------------+ #
 
 if __name__ == "__main__":
-    image_maker(True)
+
+    # +----------------- Config LEDs -----------------+ #
+    try:
+        from lib.neopixel import NeoPixel
+    except:
+        from Algo.lib.neopixel import NeoPixel
+
+    strand = NeoPixel('COM3')
+    num_led = 484
+    strand.show()
+    # +-----------------------------------------------+ #
+
+
+    image_maker(False)

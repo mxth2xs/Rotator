@@ -6,7 +6,7 @@ import time
 class NeoPixel(object):
     def __init__(self, port):
         self.port = port
-        self.ser = serial.Serial(self.port, 9600, timeout=60)
+        self.ser = serial.Serial(self.port, 115200, timeout=60)
         self.command_count = 0
 
     def setPixelColor(self, pixel, red, green, blue):
@@ -30,6 +30,10 @@ class NeoPixel(object):
     def fillPixels(strand, red, green, blue):
         for i in range(484):
             strand.setPixelColor(i, red, green, blue)
+
+    def start():
+        strand = NeoPixel('COM3')
+        strand.show()
 
 
 if __name__ == "__main__":

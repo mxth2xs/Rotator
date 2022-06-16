@@ -5,10 +5,7 @@ def jeudelavie():
         from lib.neopixel import NeoPixel
     except:
         from Algo.lib.neopixel import NeoPixel
-
-    #Script pour la configuration des LEDs.
-    strand = NeoPixel('COM3')
-    num_led = 484
+    from player import strand
 
     table=[]
 
@@ -90,4 +87,15 @@ def jeudelavie():
     boucle(table,800)
 
 if __name__ == "__main__":
+    # +----------------- Config LEDs -----------------+ #
+    try:
+        from lib.neopixel import NeoPixel
+    except:
+        from Algo.lib.neopixel import NeoPixel
+
+    strand = NeoPixel('COM3')
+    num_led = 484
+    strand.show()
+    # +-----------------------------------------------+ #
+
     jeudelavie()
