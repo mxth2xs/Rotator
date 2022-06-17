@@ -5,7 +5,7 @@ Suivez les étapes du fichier README.md afin de régler les paramètres au plus 
 
 #Choisissez votre appareil: ARDUINO = False, RASPBERRY = True
 
-device = False
+device = True
 
 #Choisissez la taille de votre panneau, ici, c'est un carré de 22*22
 height = 22
