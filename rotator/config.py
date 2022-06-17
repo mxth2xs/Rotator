@@ -10,7 +10,7 @@ device = True
 #Choisissez la taille de votre panneau, ici, c'est un carré de 22*22
 height = 44
 width = 22
-num_led = height*width
+num_led = 968
 
 
 #CONFIGURATION DU PROGRAMME POUR UN ARDUINO
