@@ -2,7 +2,6 @@ def SNAKEGAME(mode):
 	# +------------------- Imports -------------------+ #
 	import time, random
 	from pynput import keyboard
-	from config import strand, num_led, width, height
 	# +-----------------------------------------------+ #
 	
 	# +------------------- Options -------------------+ #
@@ -41,7 +40,7 @@ def SNAKEGAME(mode):
 	# +-----------------------------------------------+ #
 
 	# +----------------- Config LEDs -----------------+ #
-	if not DRY: strand = NeoPixel_arduino('COM3')
+	if not DRY: from config import strand, num_led, width, height
 	# +-----------------------------------------------+ #
 
 	# +----------- Initialisation générale -----------+ #

@@ -24,4 +24,4 @@ if device == False:
 #CONFIGURATION DU PROGRAMME POUR UN RASPBERRY
 if device == True:
     from rotator.algo.lib.neopixel_raspberry import NeoPixel_raspberry
-    strand = NeoPixel_raspberry()
+    strand = NeoPixel_raspberry(self)
