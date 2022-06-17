@@ -1,6 +1,3 @@
-from turtle import delay
-
-
 def test_led():
     import time
     from config import strand, num_led, width, height
