@@ -9,7 +9,7 @@ def test_led():
         strand.setPixelColor(0, 255, 0, 0)
         time.sleep(0.5)
         strand.setPixelColor(0, 0, 0, 0)
-
+        time.sleep(0.5)
 
 
 if __name__ == "__main__":
