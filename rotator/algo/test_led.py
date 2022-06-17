@@ -6,10 +6,11 @@ def test_led():
     from config import strand, num_led, width, height
 
     while True:
-        strand.setPixelColor(0, 255, 0, 0)
-        time.sleep(0.5)
-        strand.setPixelColor(0, 0, 0, 0)
-        time.sleep(0.5)
+        for i in range(484):
+            strand.setPixelColor(i, 255, 0, 0)
+            time.sleep(0.01)
+            strand.setPixelColor(i, 0, 0, 0)
+            time.sleep(0.01)
 
 
 if __name__ == "__main__":
