@@ -1,6 +1,5 @@
 import board
 import neopixel
-from config import strand, num_led, width, height
 
 # Configure the setup
 PIXEL_PIN = board.D21  # pin that the NeoPixel is connected to
