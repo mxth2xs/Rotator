@@ -1,4 +1,4 @@
-def SNAKEGAME(mode):
+def SNAKEGAME(mode = "D"):
 	# +------------------- Imports -------------------+ #
 	import time, random
 	from pynput import keyboard

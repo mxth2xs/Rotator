@@ -3,6 +3,7 @@ Ceci est un fichier de configuration.
 Suivez les étapes du fichier README.md afin de régler les paramètres au plus proche de vos besoins.
 """
 
+
 #Choisissez votre appareil: ARDUINO = False, RASPBERRY = True
 
 device = True
@@ -24,4 +25,8 @@ if device == False:
 #CONFIGURATION DU PROGRAMME POUR UN RASPBERRY
 if device == True:
     from rotator.algo.lib.neopixel_raspberry import NeoPixel_raspberry
-    strand = NeoPixel_raspberry(self)
+    import board
+    import neopixel as neopixel
+    PIXEL_PIN = board.D21  # pin that the NeoPixel is connected to
+    ORDER = neopixel.GRB  # pixel color channel order
+    strand = NeoPixel_raspberry(PIXEL_PIN, num_led, brightness=0.2, auto_write=False, pixel_order=ORDER)
