@@ -8,9 +8,9 @@ Suivez les étapes du fichier README.md afin de régler les paramètres au plus 
 device = True
 
 #Choisissez la taille de votre panneau, ici, c'est un carré de 22*22
-height = 44
+height = 22
 width = 22
-num_led = 968
+num_led = height*width
 
 
 #CONFIGURATION DU PROGRAMME POUR UN ARDUINO
