@@ -1,7 +1,7 @@
 import board
 import neopixel
 import microcontroller
-from rotator.algo.lib.config import num_led
+from rotator.config import num_led
 import rotator.algo.lib.neopixel_raspberry_pixelbuf as pixelbuf
 import sys
 import digitalio
