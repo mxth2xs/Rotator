@@ -40,7 +40,7 @@ def SNAKEGAME(mode = "D"):
 	# +-----------------------------------------------+ #
 
 	# +----------------- Config LEDs -----------------+ #
-	if not DRY: from config import strand, num_led, width, height
+	if not DRY: from rotator.config import strand, num_led, width, height
 	# +-----------------------------------------------+ #
 
 	# +----------- Initialisation générale -----------+ #

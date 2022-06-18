@@ -7,7 +7,7 @@ def image_maker(*args):
     from random import choice
     from os import listdir
     from pathlib import Path
-    from config import strand, num_led, width, height
+    from rotator.config import strand, num_led, width, height
     # +-----------------------------------------------+ #
 
     def run_normal():

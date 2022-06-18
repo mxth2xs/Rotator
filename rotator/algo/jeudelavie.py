@@ -1,7 +1,7 @@
 def jeudelavie():
     global table
     import random
-    from config import strand, num_led, width, height
+    from rotator.config import strand, num_led, width, height
 
     table=[]
 

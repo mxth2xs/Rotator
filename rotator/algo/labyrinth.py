@@ -1,7 +1,7 @@
 from turtle import position
 from pynput import keyboard
 from image_maker import image_maker
-from config import strand, num_led, width, height
+from rotator.config import strand, num_led, width, height
 
 def labyrinth(list_color):
     game = True 

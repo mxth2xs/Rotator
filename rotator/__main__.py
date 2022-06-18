@@ -6,10 +6,6 @@ from rotator.algo.jeudelavie import jeudelavie
 from rotator.algo.test_led import test_led
 from rotator.algo.scribble import scribble
 from rotator.UI.graphiqueSnakeFin import snakeFin
-#import sys
-  
-#Je créé le PATH Rotator, ce qui me permettra d'appeler le fichier config
-#sys.path.append('rotator')
 
 # +-----------------------------------------------+ #
 

@@ -5,7 +5,7 @@ def scribble():
     from os import listdir,remove
     from pathlib import Path
     from rotator.algo.image_maker import image_maker
-    from config import height_screen, width_screen
+    from rotator.config import height_screen, width_screen
 
     height = 44
     width = 22

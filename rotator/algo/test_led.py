@@ -1,6 +1,6 @@
 def test_led():
     import time
-    from config import strand, num_led, width, height
+    from rotator.config import strand, num_led, width, height
 
     while True:
         for i in range(num_led-1):
