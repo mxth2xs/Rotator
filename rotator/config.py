@@ -13,6 +13,10 @@ height = 22
 width = 22
 num_led = height*width
 
+#Choisissez la taille de l'écran
+height_screen = 1920
+width_screen = 1080
+
 
 #CONFIGURATION DU PROGRAMME POUR UN ARDUINO
 if device == False:

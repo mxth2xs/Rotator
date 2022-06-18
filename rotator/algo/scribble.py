@@ -4,11 +4,15 @@ def scribble():
     from PIL import ImageGrab,Image,ImageColor
     from os import listdir,remove
     from pathlib import Path
-    from image_maker import image_maker
+    from rotator.algo.image_maker import image_maker
+    from config import height_screen, width_screen
+
+    height = 44
+    width = 22
 
     #Lancement de la fenêtre Canvas
     scribble = tk.Tk()
-    C = tk.Canvas(scribble, bg="black", height=460, width=440)
+    C = tk.Canvas(scribble, bg="black", height=height_screen, width=width_screen)
     image_pixel = False
 
     def change_color():
@@ -24,9 +28,9 @@ def scribble():
 
         list_color = []
     
-        for y in range(22):
+        for y in range(width):
             list_color.append([])
-            for x in range(22):
+            for x in range(height):
                 list_color[y].append(["x", "r", "g", "b"])
         return list_color
 
@@ -58,7 +62,6 @@ def scribble():
             list_color[y][x][1] = colors_rgb[0]
             list_color[y][x][2] = colors_rgb[1]
             list_color[y][x][3] = colors_rgb[2]
-            print(list_color)
             
 
     def right_click(event):

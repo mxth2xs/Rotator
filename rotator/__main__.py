@@ -3,12 +3,13 @@ import tkinter as tk
 from rotator.algo.image_maker import image_maker
 from rotator.algo.snake import SNAKEGAME
 from rotator.algo.jeudelavie import jeudelavie
-from rotator.UI.graphiqueSnakeFin import snakeFin
 from rotator.algo.test_led import test_led
-import sys
+from rotator.algo.scribble import scribble
+from rotator.UI.graphiqueSnakeFin import snakeFin
+#import sys
   
 #Je créé le PATH Rotator, ce qui me permettra d'appeler le fichier config
-sys.path.append('rotator')
+#sys.path.append('rotator')
 
 # +-----------------------------------------------+ #
 
@@ -66,6 +67,8 @@ space_r5 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=5)
 space_r7 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=7)
 space_r9 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=9)
 space_r9 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=11)
+space_r9 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=13)
+space_r9 = tk.Label(fenetre_principale, bg=c_fond, text=" ").grid(row=15)
 # +-----------------------------------------------+ #
 
 # +---------- Boutons fenêtre principale ---------+ #
@@ -82,8 +85,16 @@ btn_labyrinth = tk.Button(fenetre_principale, text="Labyrinth", fg=c_texte, bg=c
 ).grid(row=8, padx=15)
 
 btn_image_maker = tk.Button(fenetre_principale, text="Image Maker", fg=c_texte, bg=c_bouton, width=40, height=3, 
-    command= lambda: afficher_jeu("Image Maker","Affichez l'image \n de votre choix \n en LEDs ! ", 10, 25, "test_led") 
+    command= lambda: afficher_jeu("Image Maker","Affichez l'image \n de votre choix \n en LEDs ! ", 10, 25, "image_maker") 
 ).grid(row=10, padx=15)
+
+btn_image_maker = tk.Button(fenetre_principale, text="Scribble", fg=c_texte, bg=c_bouton, width=40, height=3, 
+    command= lambda: afficher_jeu("Test led","Juste pour tester les leds", 10, 25, "scribble") 
+).grid(row=12, padx=15)
+
+btn_image_maker = tk.Button(fenetre_principale, text="Test led", fg=c_texte, bg=c_bouton, width=40, height=3, 
+    command= lambda: afficher_jeu("Test led","Juste pour tester les leds", 10, 25, "test_led") 
+).grid(row=14, padx=15)
 # +-----------------------------------------------+ #
 
 
