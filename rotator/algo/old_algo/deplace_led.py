@@ -90,7 +90,9 @@ if __name__ == "__main__":
     # +----------------- Config LEDs -----------------+ #
     try:
         from lib.neopixel_arduino import NeoPixel_arduino
-        from Algo.lib.neopixel_arduino import NeoPixel_arduino
+        from algo.lib.neopixel_arduino import NeoPixel_arduino
+    except:
+        pass
 
     strand = NeoPixel_arduino('COM3')
     num_led = 484

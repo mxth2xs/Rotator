@@ -1,7 +1,8 @@
-#CE PROGRAMME A ETE CONCU POUR ETEINDRE L'ENTIERETE DU PANNEAU SANS PASSER PAR __MAIN__.py
-
 def eteint(device):
-    num_led = 484
+    try:
+        from rotator.config import num_led
+    except:
+        num_led = 484
 
     #--------------------------------------------- IMPORT DES LIBRAIRIES ARDUINO ---------------------------------------------
     if device == False:
